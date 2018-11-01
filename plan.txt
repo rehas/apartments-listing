@@ -1,0 +1,26 @@
+Phase1 - Backend
+
+ - SetUp TypeScript
+ - SetUp Koa Server
+ - SetUp TypeORM
+ - SetUp Postgres / Docker
+
+Phase2 - Client
+
+ - SetUp React - App
+ - Add redux / redux thunk - superagent - redux-devtools
+ - Design Layout
+  - Apartmens / Maps Layout
+    - Filtering -> Decide server side or client side. -> Server Side better
+  - Edit / Delete / Create Apartment screen
+  - Admin screen for CRUD -> Users
+
+ - Write down components
+ - Write down store  / reducers
+ - Write down actions
+ - KnowHow -> Show Apartments on map
+  - Show map
+  - Show pins
+  - Make pins clickable / show popover info
+-------------
+
