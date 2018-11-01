@@ -24,3 +24,46 @@ Phase2 - Client
   - Make pins clickable / show popover info
 -------------
 
+Backend
+ Entities
+ - Draw out entity relationShips
+  - User entity
+    - Login / SignUp / Logout
+    - JWT Token
+    - id : unique
+    - username - email
+    - User Type - Client / Realtor / Admin
+    - password : string
+  - Apartment Entity
+    - id: unique
+    - name : String
+    - description
+    - floor area size
+    - price per month
+    - number of rooms
+    - valid geolocation coordinates
+    - date added
+    - associated realtor (ManyToOne)
+    - Available?
+ - Implement Entities
+  - Cascade delete options for deletion of a realtor -> Does the apartments of the realtor go away? -> Yes
+ 
+ Controllers
+ - Login / Logout / SignUp Controllers
+  - Password check / use bcyrpt
+  - Return JWT Token for authentication
+  - Check if all data provided are valid
+ - Apartments
+  - Create Apartment
+    - Check authorization
+  - Get All Apartments
+    - Either filterable, or a separate endpoint / decide on this. 
+  - Delete Apartment
+    - Check credentials / check authorization
+  - Edit Apartment
+    - Check credentials / check authorization
+ - GeoLocation 
+  - Should this be a sepeare endPoint ? Or during the creation of the entity?
+  - If seperate implement and test. 
+ - Implement Entity Rest Api Controllers
+ - Test
