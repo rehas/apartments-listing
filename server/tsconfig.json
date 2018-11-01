@@ -15,6 +15,7 @@
     "target": "es2017",
     "types" : [ "node" ],
     "typeRoots": [
+      "@typesCustom",
       "node_modules/@types"
     ],
     "outDir": "target/",
@@ -26,10 +27,6 @@
   "exclude": [
       "node_modules",
       // "**/*.spec.ts"
-  ],
-  "typeRoots": [
-    "@typesCustom",
-    "node_modules/@types"
   ],
   "compileOnSave": true
 }
