@@ -1,0 +1,20 @@
+{
+  "name": "apartments-app-server",
+  "version": "1.0.0",
+  "description": "toptal screening assignment apartments app",
+  "main": "target/index.js",
+  "scripts": {
+    "start": "nodemon .",
+    "test": "node_modules/.bin/mocha --require ts-node/register src/**/*.spec.ts",
+    "watch": "node_modules/.bin/tsc -w",
+    "compile": "node_modules/.bin/tsc -p ."
+  },
+  "author": "Berat Reha Sonmez",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^10.12.1",
+    "nodemon": "^1.18.5",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.5"
+  }
+}

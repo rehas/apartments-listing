@@ -1,6 +1,6 @@
 Phase1 - Backend
 
- - SetUp TypeScript
+ + SetUp TypeScript
  - SetUp Koa Server
  - SetUp TypeORM
  - SetUp Postgres / Docker
