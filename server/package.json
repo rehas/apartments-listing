@@ -12,8 +12,16 @@
   "author": "Berat Reha Sonmez",
   "license": "ISC",
   "dependencies": {
+    "@types/koa": "^2.0.46",
+    "@types/koa-bodyparser": "^5.0.1",
+    "@types/koa-router": "^7.0.32",
     "@types/node": "^10.12.1",
+    "kcors": "^2.2.2",
+    "koa": "^2.6.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
     "nodemon": "^1.18.5",
+    "routing-controllers": "^0.7.7",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.5"
   }
