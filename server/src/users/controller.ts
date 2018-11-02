@@ -1,12 +1,14 @@
-import {JsonController, Body, Post, BadRequestError} from 'routing-controllers'
+import {JsonController, Body, Post, BadRequestError, Authorized, CurrentUser} from 'routing-controllers'
 import User from './entity';
 import { sign } from '../jwt';
 
 @JsonController()
 export default class UserController{
 
+  // @Authorized("testing auth")
   @Post('/users/signup')
   async signup(
+    // @CurrentUser()
     @Body() data : User
   ){
 

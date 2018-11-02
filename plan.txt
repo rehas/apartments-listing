@@ -41,8 +41,10 @@ Backend
     + password : string
 
     HERE=> Authentication decorator
+      + Simple implementation setup. 
       - Check if logged in
-    - Authorization decorator 
+    - Authorization decorator
+      + Simple implementation setup. 
       - Check if authorized to access resource
 
   - Apartment Entity
