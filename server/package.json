@@ -12,10 +12,12 @@
   "author": "Berat Reha Sonmez",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/koa": "^2.0.46",
     "@types/koa-bodyparser": "^5.0.1",
     "@types/koa-router": "^7.0.32",
     "@types/node": "^10.12.1",
+    "bcrypt": "^3.0.2",
     "kcors": "^2.2.2",
     "koa": "^2.6.1",
     "koa-bodyparser": "^4.2.1",

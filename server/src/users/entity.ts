@@ -1,6 +1,8 @@
 import {Entity, BaseEntity, PrimaryGeneratedColumn, Column} from 'typeorm'
 import { IsString, MinLength, IsEmail } from 'class-validator';
 import { Exclude } from 'class-transformer';
+import * as bcrypt from 'bcrypt'
+
 
 @Entity()
 export default class User extends BaseEntity {
@@ -24,5 +26,14 @@ export default class User extends BaseEntity {
 
   @IsString()
   @Column('text', {nullable:false})
-  userType : string
+  userType : string // Should only be one of client, realtor, admin
+
+  async setPassword(rawPassword: string) {
+    const hash = await bcrypt.hash(rawPassword, 10)
+    this.password = hash
+  }
+
+  checkPassword(rawPassword: string): Promise<boolean> {
+    return bcrypt.compare(rawPassword, this.password)
+  }
 }
