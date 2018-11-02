@@ -1,7 +1,8 @@
-import {Entity, BaseEntity, PrimaryGeneratedColumn, Column} from 'typeorm'
+import {Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm'
 import { IsString, MinLength, IsEmail } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcrypt'
+import Apartment from '../apartments/entity';
 
 
 @Entity()
@@ -27,6 +28,9 @@ export default class User extends BaseEntity {
   @IsString()
   @Column('text', {nullable:false})
   userType : string // Should only be one of client, realtor, admin
+
+  @OneToMany(_=> Apartment, apartment=> apartment.user)
+  apartments : Apartment[]
 
   async setPassword(rawPassword: string) {
     const hash = await bcrypt.hash(rawPassword, 10)

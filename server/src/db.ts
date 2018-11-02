@@ -3,6 +3,7 @@ import { DefaultNamingStrategy } from 'typeorm/naming-strategy/DefaultNamingStra
 import { NamingStrategyInterface } from 'typeorm/naming-strategy/NamingStrategyInterface'
 import { snakeCase } from 'typeorm/util/StringUtils'
 import User from './users/entity';
+import Apartment from './apartments/entity';
 
 const dbname = 'apartments' 
 const db_username = 'postgres'
@@ -32,7 +33,8 @@ export default () =>
     type: "postgres",
     url: process.env.DATABASE_URL || `postgres://${db_username}:${db_pwd}@localhost:5432/${dbname}`,
     entities:[
-      User
+      User,
+      Apartment
     ],
     synchronize: true, 
     logging: true,

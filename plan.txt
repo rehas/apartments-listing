@@ -40,14 +40,14 @@ Backend
     + User Type - Client / Realtor / Admin => TODO: Make sure DB doesn't accept anything else. => Create interface or customType
     + password : string
 
-    HERE=> Authentication decorator
+    - Authentication decorator
       + Simple implementation setup. 
       - Check if logged in
     - Authorization decorator
       + Simple implementation setup. 
       - Check if authorized to access resource
 
-  - Apartment Entity
+  HERE=> Apartment Entity
     - id: unique
     - name : String
     - description
