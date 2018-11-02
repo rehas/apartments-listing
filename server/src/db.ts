@@ -2,6 +2,7 @@ import { createConnection } from 'typeorm'
 import { DefaultNamingStrategy } from 'typeorm/naming-strategy/DefaultNamingStrategy'
 import { NamingStrategyInterface } from 'typeorm/naming-strategy/NamingStrategyInterface'
 import { snakeCase } from 'typeorm/util/StringUtils'
+import User from './users/entity';
 
 const dbname = 'apartments' 
 const db_username = 'postgres'
@@ -30,7 +31,9 @@ export default () =>
   createConnection({
     type: "postgres",
     url: process.env.DATABASE_URL || `postgres://${db_username}:${db_pwd}@localhost:5432/${dbname}`,
-    
+    entities:[
+      User
+    ],
     synchronize: true, 
     logging: true,
     namingStrategy: new CustomNamingStrategy(),
