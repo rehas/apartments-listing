@@ -32,13 +32,19 @@ Backend
       + SignUp
       - Login
         + Simple Login
-        - Login with token
+        + Login with token
       - Logout
-    - JWT Token
+    + JWT Token
     + id : unique
     + username - email
-    + User Type - Client / Realtor / Admin
+    + User Type - Client / Realtor / Admin => TODO: Make sure DB doesn't accept anything else. => Create interface or customType
     + password : string
+
+    HERE=> Authentication decorator
+      - Check if logged in
+    - Authorization decorator 
+      - Check if authorized to access resource
+
   - Apartment Entity
     - id: unique
     - name : String

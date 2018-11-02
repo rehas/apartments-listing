@@ -19,8 +19,6 @@ export default class UserController{
 
     const entity = User.create({fullName, email, userType})
 
-    // entity.email = email
-
     await entity.setPassword(password)
 
     const user = entity.save()
