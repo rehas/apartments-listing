@@ -1,16 +1,20 @@
-import {JsonController, Body, Post} from 'routing-controllers'
+import {JsonController, Body, Post, BadRequestError} from 'routing-controllers'
 import User from './entity';
 
 @JsonController()
 export default class UserController{
 
-  @Post('/users')
+  @Post('/users/signup')
   async signup(
     @Body() data : User
   ){
-    const {fullName, email, password, userType} = data
 
-    console.log(data);
+    
+    const {fullName, email, password, userType} = data
+    
+    if(User.findOne({where: {email}})){
+      throw new BadRequestError("This email address is taken, please login or signup with a different address")
+    }
 
     const entity = User.create({fullName, email, userType})
 
@@ -22,6 +26,28 @@ export default class UserController{
 
     return user
     
+  }
+
+  @Post('/users/login')
+  async login(
+    @Body() {email, password}
+  ){
+    const user = await User.findOne({where: {email}})
+    
+    // Check if User exists
+    if (!user || !user.id) {
+      throw new BadRequestError('A user with this email does not exist') // Can be changed to same error message as below to give less info to attackers
+    }
+
+    // Check if password is correct
+
+    if(!await user.checkPassword(password)){
+      throw new BadRequestError('Username or Password is incorrect')
+    }
+
+    return user
+    
+
   }
 
 }
