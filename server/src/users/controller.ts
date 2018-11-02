@@ -1,5 +1,6 @@
 import {JsonController, Body, Post, BadRequestError} from 'routing-controllers'
 import User from './entity';
+import { sign } from '../jwt';
 
 @JsonController()
 export default class UserController{
@@ -12,7 +13,7 @@ export default class UserController{
     
     const {fullName, email, password, userType} = data
     
-    if(User.findOne({where: {email}})){
+    if(await User.findOne({where: {email}})){
       throw new BadRequestError("This email address is taken, please login or signup with a different address")
     }
 
@@ -45,9 +46,8 @@ export default class UserController{
       throw new BadRequestError('Username or Password is incorrect')
     }
 
-    return user
-    
-
+    const jwt = sign({ id: user.id })
+    return { jwt }
   }
 
 }
