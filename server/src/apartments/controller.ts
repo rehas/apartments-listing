@@ -1,4 +1,4 @@
-import { JsonController, Post, CurrentUser, Body, Authorized, UnauthorizedError, QueryParams, Get } from "routing-controllers";
+import { JsonController, Post, CurrentUser, Body, Authorized, UnauthorizedError, QueryParams, Get, Delete, Param, BadRequestError, NotFoundError, Patch } from "routing-controllers";
 import Apartment from "./entity";
 import User from "../users/entity";
 import { Between, Not, IsNull } from "typeorm";
@@ -53,6 +53,11 @@ export default class ApartmentsController{
     }
     )
 
+    // Show only available ones to clients 
+    if(user.userType === 'client'){
+      available = 'true'
+    }
+
     // Eliminate undefined or wrong query params also convert strings into proper primitive types (int, bool)
 
     sizeMax   = !isNaN(sizeMax)  ? sizeMax  : Math.pow(2, 16)
@@ -79,5 +84,63 @@ export default class ApartmentsController{
     return await Apartment.find({where: searchQuery})
 
   }
+
+  @Authorized(["realtor", "admin"])
+  @Delete('/apartments/:id([0-9]+)')
+  async deleteApartment(
+    @Param('id') id : number
+  ){
+    const apartmentToDelete = await Apartment.findOne(id)
+
+    if(!apartmentToDelete){
+      throw new NotFoundError("Apartment Not Found")
+    }
+    
+    return await apartmentToDelete.remove()
+    
+  }
+
+  @Authorized(["realtor", "admin"])
+  @Patch('/apartments/:id([0-9]+)')
+  async editApartment(
+    @Param('id') id : number,
+    @Body() data : Partial<Apartment>
+  ){
+
+    if(Object.keys(data).length === 0){
+      throw new BadRequestError("Missing data for editing")
+    }
+
+    const apartmentToEdit = await Apartment.findOne(id)
+    if(!apartmentToEdit){
+      throw new NotFoundError("Apartment Not Found")
+    }
+
+    console.log(Object.keys(apartmentToEdit))
+    console.log(Object.keys(data))
+
+    console.log(
+      Object.keys(data)
+        .filter(key => (
+          data[key] !== undefined && 
+          (data[key].length > 0 || !isNaN(data[key])) && 
+          Object.keys(apartmentToEdit).includes(key))
+        )
+    )
+
+
+    Object.keys(data)
+      .filter(key => (
+        data[key] !==undefined && 
+        (data[key].length > 0 || !isNaN(data[key])) && 
+        Object.keys(apartmentToEdit).includes(key)))
+      .forEach(key => {
+        console.log(`keys for apartments -- ${key}`)
+        apartmentToEdit[key] = data[key]
+      })
+    
+    return await apartmentToEdit.save()
+
+  } 
 
 }
