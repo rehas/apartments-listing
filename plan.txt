@@ -37,7 +37,9 @@ Backend
     + JWT Token
     + id : unique
     + username - email
-    + User Type - Client / Realtor / Admin => TODO: Make sure DB doesn't accept anything else. => Create interface or customType
+    + User Type - Client / Realtor / Admin 
+      + Api endpoint checks the userType 
+      - TODO: Make sure DB doesn't accept anything else. => Create interface or customType
     + password : string
 
     - Authentication decorator
@@ -48,16 +50,16 @@ Backend
       - Check if authorized to access resource
 
   HERE=> Apartment Entity
-    - id: unique
-    - name : String
-    - description
-    - floor area size
-    - price per month
-    - number of rooms
+    + id: unique
+    + name : String
+    + description
+    + floor area size
+    + price per month
+    + number of rooms
     - valid geolocation coordinates
-    - date added
-    - associated realtor (ManyToOne)
-    - Available?
+    + date added
+    + associated realtor (ManyToOne)
+    + Available?
  - Implement Entities
   - Cascade delete options for deletion of a realtor -> Does the apartments of the realtor go away? -> Yes
  
@@ -67,10 +69,15 @@ Backend
   - Return JWT Token for authentication
   - Check if all data provided are valid
  - Apartments
-  - Create Apartment
-    - Check authorization
+  + Create Apartment
+    + Check authorization
   - Get All Apartments
-    - Either filterable, or a separate endpoint / decide on this. 
+    + Either filterable, or a separate endpoint / decide on this. => filterable
+    + Filter based on query params,
+      + Make sure query params are of the right type
+    + filter based on userType
+      - If client => only availables
+      - If Other => All
   - Delete Apartment
     - Check credentials / check authorization
   - Edit Apartment
