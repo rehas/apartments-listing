@@ -2,6 +2,8 @@ import {JsonController, Body, Post, BadRequestError, Authorized, CurrentUser} fr
 import User from './entity';
 import { sign } from '../jwt';
 
+const userTypes = ['client', 'realtor', 'admin']
+
 @JsonController()
 export default class UserController{
 
@@ -9,15 +11,23 @@ export default class UserController{
   @Post('/users/signup')
   async signup(
     // @CurrentUser()
-    @Body() data : User
+    @Body() data :  User
   ){
 
     
     const {fullName, email, password, userType} = data
+
+    // Check if userType is valid
+
+    if(!userTypes.includes(userType)){
+      throw new BadRequestError("Invalid User Type")
+    }
     
     if(await User.findOne({where: {email}})){
       throw new BadRequestError("This email address is taken, please login or signup with a different address")
     }
+
+    console.log(typeof userType)
 
     const entity = User.create({fullName, email, userType})
 

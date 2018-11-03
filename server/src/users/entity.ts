@@ -1,9 +1,10 @@
 import {Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm'
-import { IsString, MinLength, IsEmail } from 'class-validator';
+import { IsString, MinLength, IsEmail} from 'class-validator';
 import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcrypt'
 import Apartment from '../apartments/entity';
 
+export type Role = 'client'| 'realtor'| 'admin';
 
 @Entity()
 export default class User extends BaseEntity {
@@ -26,8 +27,8 @@ export default class User extends BaseEntity {
   password: string
 
   @IsString()
-  @Column('text', {nullable:false})
-  userType : string // Should only be one of client, realtor, admin
+  @Column('text', {nullable:false, default:'client' })
+  userType : Role // Should only be one of client, realtor, admin
 
   @OneToMany(_=> Apartment, apartment=> apartment.user)
   apartments : Apartment[]
