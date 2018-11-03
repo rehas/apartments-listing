@@ -28,12 +28,6 @@ Backend
  Entities
  - Draw out entity relationShips
   - User entity
-    - Login / SignUp / Logout
-      + SignUp
-      - Login
-        + Simple Login
-        + Login with token
-      - Logout
     + JWT Token
     + id : unique
     + username - email
@@ -65,23 +59,33 @@ Backend
  
  Controllers
  - Login / Logout / SignUp Controllers
-  - Password check / use bcyrpt
-  - Return JWT Token for authentication
-  - Check if all data provided are valid
+  + Password check / use bcyrpt
+  + Return JWT Token for authentication
+  + Check if all data provided are valid
+  - Login / SignUp / Logout
+    + SignUp
+    + Login
+      + Simple Login
+      + Login with token
+  - Logout
+  + Delete User
+    + Only Admin
+  + Edit User
+    + Only Admin
  - Apartments
   + Create Apartment
     + Check authorization
-  - Get All Apartments
+  + Get All Apartments
     + Either filterable, or a separate endpoint / decide on this. => filterable
     + Filter based on query params,
       + Make sure query params are of the right type
     + filter based on userType
-      - If client => only availables
-      - If Other => All
-  - Delete Apartment
-    - Check credentials / check authorization
-  - Edit Apartment
-    - Check credentials / check authorization
+      + If client => only availables
+      + If Other => All
+  + Delete Apartment
+    + Check credentials / check authorization
+  + Edit Apartment
+    + Check credentials / check authorization
  - GeoLocation 
   - Should this be a sepeare endPoint ? Or during the creation of the entity?
   - If seperate implement and test. 
