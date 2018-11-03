@@ -13,7 +13,7 @@ export default class User extends BaseEntity {
 
   @IsString()
   @MinLength(2)
-  @Column('text')
+  @Column('text', {nullable:false})
   fullName: string
 
   @IsEmail()

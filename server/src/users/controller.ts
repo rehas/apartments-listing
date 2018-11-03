@@ -1,4 +1,4 @@
-import {JsonController, Body, Post, BadRequestError, Authorized, CurrentUser} from 'routing-controllers'
+import {JsonController, Body, Post, BadRequestError, Authorized, CurrentUser, Delete, Param, Put, Patch} from 'routing-controllers'
 import User from './entity';
 import { sign } from '../jwt';
 
@@ -7,14 +7,10 @@ const userTypes = ['client', 'realtor', 'admin']
 @JsonController()
 export default class UserController{
 
-  // @Authorized("testing auth")
   @Post('/users/signup')
   async signup(
-    // @CurrentUser()
     @Body() data :  User
   ){
-
-    
     const {fullName, email, password, userType} = data
 
     // Check if userType is valid
@@ -58,6 +54,64 @@ export default class UserController{
 
     const jwt = sign({ id: user.id })
     return { jwt }
+  }
+
+  @Authorized(["admin"])
+  @Delete('/users/:userid([0-9]+)')
+  async deleteUser(
+    @Param('userid') userid: number
+  ){
+
+    const userToDelete = await User.findOne(userid)
+
+    if(!userToDelete){
+      throw new BadRequestError("User Not Found")
+    }
+
+    userToDelete.remove()
+
+    return `Deleted user ${userToDelete.id}`
+
+  }
+
+  @Authorized(["admin"])
+  @Patch('/users/:userid([0-9]+)')
+  async editUser(
+    @Param('userid') userid : number,
+    @Body() userData : Partial<User>
+  ){
+    // Check if there's any form data
+    if(Object.keys(userData).length === 0){
+      throw new BadRequestError("Missing data for editing")
+    }
+
+    const userToBeEdited = await User.findOne(userid)
+
+    // Check if there's such a user with provided id
+    if(!userToBeEdited){
+      throw new BadRequestError("User is not found")
+    }
+
+    // For the provided keys, check if the keys hold any value, the value is longer than zero and the key is not password
+    // For each key, check if the key is valid and then set the value for the entity found from DB
+    Object.keys(userData)
+      .filter(key=> (
+        userData[key] && 
+        userData[key].length > 0 && 
+        key !=='password' && 
+        Object.keys(userToBeEdited).includes(key)))
+      .forEach( key=>{
+        console.log(`key is now ${key}`)
+        userToBeEdited[key] = userData[key]
+    })
+
+    // Set password as hashed
+    if(userData.password){
+      await userToBeEdited.setPassword(userData.password)
+    }
+
+    return userToBeEdited.save()
+
   }
 
 }
