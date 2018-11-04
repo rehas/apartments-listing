@@ -7,7 +7,7 @@ Phase1 - Backend
 
 Phase2 - Client
 
- - SetUp React - App
+ HERE=> SetUp React - App
  - Add redux / redux thunk - superagent - redux-devtools
  - Design Layout
   - Apartmens / Maps Layout
@@ -27,7 +27,7 @@ Phase2 - Client
 Backend
  Entities
  - Draw out entity relationShips
-  - User entity
+  + User entity
     + JWT Token
     + id : unique
     + username - email
@@ -38,19 +38,21 @@ Backend
 
     - Authentication decorator
       + Simple implementation setup. 
-      - Check if logged in
+      + Check if logged in
     - Authorization decorator
       + Simple implementation setup. 
-      - Check if authorized to access resource
+      + Check if authorized to access resource
 
-  HERE=> Apartment Entity
+  - Apartment Entity
     + id: unique
     + name : String
     + description
     + floor area size
     + price per month
     + number of rooms
-    - valid geolocation coordinates
+    + valid geolocation coordinates
+      + Find the appropriate data type from googlemaps Api
+      + Set in the DB
     + date added
     + associated realtor (ManyToOne)
     + Available?
@@ -72,7 +74,7 @@ Backend
     + Only Admin
   + Edit User
     + Only Admin
- - Apartments
+ + Apartments
   + Create Apartment
     + Check authorization
   + Get All Apartments
@@ -89,7 +91,7 @@ Backend
  - GeoLocation 
   - Should this be a sepeare endPoint ? Or during the creation of the entity?
   - If seperate implement and test. 
- - Implement Entity Rest Api Controllers
+ + Implement Entity Rest Api Controllers
  - Test
 
 
