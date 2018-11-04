@@ -7,9 +7,9 @@ Phase1 - Backend
 
 Phase2 - Client
 
- HERE=> SetUp React - App
- - Add redux / redux thunk - superagent - redux-devtools
- - Design Layout
+ + SetUp React - App
+ + Add redux / redux thunk - superagent - redux-devtools
+ HERE=> Design Layout
   - Apartmens / Maps Layout
     - Filtering -> Decide server side or client side. -> Server Side better
   - Edit / Delete / Create Apartment screen
