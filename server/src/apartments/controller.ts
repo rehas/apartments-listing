@@ -123,7 +123,7 @@ export default class ApartmentsController{
       Object.keys(data)
         .filter(key => (
           data[key] !== undefined && 
-          (data[key].length > 0 || !isNaN(data[key])) && 
+          (data[key].length > 0 || !isNaN(data[key]) || (data[key].lat && data[key].lon) ) && 
           Object.keys(apartmentToEdit).includes(key))
         )
     )
@@ -132,7 +132,7 @@ export default class ApartmentsController{
     Object.keys(data)
       .filter(key => (
         data[key] !==undefined && 
-        (data[key].length > 0 || !isNaN(data[key])) && 
+        (data[key].length > 0 || !isNaN(data[key]) || (data[key].lat && data[key].lon) ) && 
         Object.keys(apartmentToEdit).includes(key)))
       .forEach(key => {
         console.log(`keys for apartments -- ${key}`)

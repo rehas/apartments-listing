@@ -1,4 +1,4 @@
-import {JsonController, Body, Post, BadRequestError, Authorized, CurrentUser, Delete, Param, Put, Patch} from 'routing-controllers'
+import {JsonController, Body, Post, BadRequestError, Authorized, Delete, Param, Patch} from 'routing-controllers'
 import User from './entity';
 import { sign } from '../jwt';
 

@@ -1,6 +1,11 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Timestamp } from "typeorm";
-import { IsString, IsNumber, IsBoolean } from "class-validator";
+import { IsString, IsNumber, IsBoolean, IsJSON } from "class-validator";
 import User from "../users/entity";
+
+type Geolocation = {
+  lat: number,
+  lon: number
+}
 
 @Entity()
 export default class Apartment extends BaseEntity {
@@ -32,6 +37,9 @@ export default class Apartment extends BaseEntity {
   available : Boolean
 
   // TODO: Add valid geolocation coordinates
+  @IsJSON()
+  @Column({type: 'json', nullable:true})
+  geolocation: Geolocation
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   dateAdded: Timestamp
