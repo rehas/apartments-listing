@@ -1,8 +1,5 @@
 import React,{PureComponent} from 'react';
-import {Input, Button, Menu, NativeSelect, FormHelperText} from '@material-ui/core/';
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
+import {Input, Button, NativeSelect} from '@material-ui/core/';
 import {connect} from 'react-redux'
 class SignUpForm extends PureComponent{
 

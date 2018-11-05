@@ -2,6 +2,7 @@ import React,{PureComponent} from 'react';
 import { connect } from 'react-redux';
 import {Input, Button} from '@material-ui/core/';
 import SignUpForm from './SignUpForm';
+import {login, logout} from '../actions/users'
 
 class LoginSignUp extends PureComponent  {
 
@@ -11,6 +12,17 @@ class LoginSignUp extends PureComponent  {
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const {email, password} = this.state
+    this.props.login( email, password )
+  }
+
+  handleLogout = (e) => {
+    e.preventDefault()
+    this.props.logout();
   }
   
   render(){
@@ -41,8 +53,13 @@ class LoginSignUp extends PureComponent  {
       <Button
         type="submit"
         
-        // onClick={this.handleSubmit}
+        onClick={this.handleSubmit}
       > Login</Button>
+      <Button
+        type="submit"
+        
+        onClick={this.handleLogout}
+      > Logout</Button>
       </form>
       <Button onClick={(e) => this.setState({signup: !this.state.signup})}>Sign UP</Button>
 
@@ -63,4 +80,11 @@ class LoginSignUp extends PureComponent  {
   }
 }
 
-export default connect()(LoginSignUp)
+const mapStateToProps = state => {
+  return {
+    currentUser : state.currentUser
+  }
+}
+
+
+export default connect(mapStateToProps, {login, logout})(LoginSignUp)
