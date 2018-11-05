@@ -1,6 +1,7 @@
 import React,{PureComponent} from 'react';
 import {Input, Button, NativeSelect} from '@material-ui/core/';
 import {connect} from 'react-redux'
+import {signup} from '../actions/users'
 class SignUpForm extends PureComponent{
 
   state={
@@ -8,14 +9,40 @@ class SignUpForm extends PureComponent{
   }
 
   handleChange = (e) =>{
+    console.log(e.target.value)
+    if(e.target.name ==="userType" && e.target.value !== "admin"){
+      this.setState({
+        isAdmin: ""
+      })
+    }
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  handleAdminKey = (e) => {
+    console.log(e.target.value)
+    if(e.target.value !== "admin"){
+      this.setState({
+        isAdmin: ""
+      })
+    }
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {email, password, fullName, userType} = this.state
+    const {email, password, fullName, userType, isAdmin} = this.state
     if (!(email && password && fullName)) return
-    this.props.signup(email, password, fullName, userType )
+    // Admin key must be present & correct
+    // This check can be made in the backend to prevent exposing the key
+    // For the sake of simplicity only check is in frontEnd for now.
+    if(isAdmin.length > 0 && isAdmin !== 'isAdmin')  return // Make a pop-up for feedback
+    
+    const newUserData = {
+      email, 
+      password, 
+      fullName, 
+      userType
+    }
+    this.props.signup(newUserData)
   }
 
   render(){
@@ -37,7 +64,7 @@ class SignUpForm extends PureComponent{
         onChange={this.handleChange}
         label="None"
         id="email"
-        type="text"
+        type="email"
         name="email"
         defaultValue=""
 
@@ -68,11 +95,12 @@ class SignUpForm extends PureComponent{
       <Input
         onChange={this.handleChange}
         label="Dense"
-        type="password"
+        type="text"
         id="admin-password"
         name="isAdmin"
-        defaultValue=""
+        defaultValue={this.state.isAdmin}
         style={{display:this.state.userType==="admin" ? "inline-flex" : "none"}}
+        value={this.state.isAdmin}
         placeholder="Admin Key"
         margin="dense"
       />
@@ -84,4 +112,4 @@ class SignUpForm extends PureComponent{
   }
 }
 
-export default connect()(SignUpForm)
+export default connect(null, {signup})(SignUpForm)

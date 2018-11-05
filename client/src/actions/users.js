@@ -6,6 +6,8 @@ import {baseUrl} from '../constants'
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
 export const USER_LOGOUT = 'USER_LOGOUT'
 export const USER_LOGIN_FAILED = 'USER_LOGIN_FAILED'
+export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS'
+export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED'
 
 const userLoginSuccess = (login) => ({
   type: USER_LOGIN_SUCCESS,
@@ -18,6 +20,11 @@ const userLoginFailed = () =>({
 
 const userLogout = () => ({
   type: USER_LOGOUT,
+})
+
+const userSignUpSuccess = (newUser) => ({
+  type: USER_SIGNUP_SUCCESS,
+  payload: newUser
 })
 
 export const login = (email, password) => (dispatch) => {
@@ -36,6 +43,16 @@ export const login = (email, password) => (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch(userLogout())
+}
+
+export const signup = (newUserData) => (dispatch) => {
+  request
+    .post(`${baseUrl}/users/signup`)
+    .send(newUserData)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(err => console.log(err))
 }
 
 
