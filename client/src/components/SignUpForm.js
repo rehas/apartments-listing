@@ -9,7 +9,6 @@ class SignUpForm extends PureComponent{
   }
 
   handleChange = (e) =>{
-    console.log(e.target.value)
     if(e.target.name ==="userType" && e.target.value !== "admin"){
       this.setState({
         isAdmin: ""
@@ -19,7 +18,6 @@ class SignUpForm extends PureComponent{
   }
 
   handleAdminKey = (e) => {
-    console.log(e.target.value)
     if(e.target.value !== "admin"){
       this.setState({
         isAdmin: ""
@@ -34,7 +32,7 @@ class SignUpForm extends PureComponent{
     // Admin key must be present & correct
     // This check can be made in the backend to prevent exposing the key
     // For the sake of simplicity only check is in frontEnd for now.
-    if(isAdmin.length > 0 && isAdmin !== 'isAdmin')  return // Make a pop-up for feedback
+    if(isAdmin && isAdmin.length > 0 && isAdmin !== 'isAdmin')  return // Make a pop-up for feedback
     
     const newUserData = {
       email, 

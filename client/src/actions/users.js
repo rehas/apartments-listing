@@ -22,9 +22,8 @@ const userLogout = () => ({
   type: USER_LOGOUT,
 })
 
-const userSignUpSuccess = (newUser) => ({
+const userSignUpSuccess = () => ({
   type: USER_SIGNUP_SUCCESS,
-  payload: newUser
 })
 
 export const login = (email, password) => (dispatch) => {
@@ -50,9 +49,17 @@ export const signup = (newUserData) => (dispatch) => {
     .post(`${baseUrl}/users/signup`)
     .send(newUserData)
     .then(response => {
-      console.log(response)
+      dispatch(userSignUpSuccess())
+      return Promise.resolve( response.body)
     })
-    .catch(err => console.log(err))
+    .then(data=>{
+      console.log(data)
+      dispatch(login(data.email, newUserData.password))
+    })
+    .catch(err => {
+      console.log(err)
+      dispatch(logout())
+    })
 }
 
 
