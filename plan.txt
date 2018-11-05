@@ -10,6 +10,10 @@ Phase2 - Client
  + SetUp React - App
  + Add redux / redux thunk - superagent - redux-devtools
  HERE=> Design Layout
+  - Login / SignUp Page
+    + Form simple layout and simple functionality
+    - Form actual signup / login process
+    - Form layout fix in grid
   - Apartmens / Maps Layout
     - Filtering -> Decide server side or client side. -> Server Side better
   - Edit / Delete / Create Apartment screen
