@@ -15,19 +15,19 @@ const userLoginSuccess = (login) => ({
 })
 
 const userLoginFailed = () =>({
-  type: USER_LOGIN_FAILED,
+  type: USER_LOGIN_FAILED
 })
 
 const userLogout = () => ({
-  type: USER_LOGOUT,
+  type: USER_LOGOUT
 })
 
 const userSignUpSuccess = () => ({
-  type: USER_SIGNUP_SUCCESS,
+  type: USER_SIGNUP_SUCCESS
 })
 
 export const login = (email, password) => (dispatch) => {
-  request
+  return Promise.resolve (request
     .post(`${baseUrl}/users/login`)
     .send({email, password})
     .then(response => {
@@ -38,6 +38,7 @@ export const login = (email, password) => (dispatch) => {
     .catch(err=> {
       dispatch(userLoginFailed())
     })
+  )
 }
 
 export const logout = () => (dispatch) => {
