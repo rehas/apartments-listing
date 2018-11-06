@@ -21,8 +21,9 @@ Phase2 - Client
         +implement logout functionality
           + redirect to login page after logout
           + clear user JWT data
-      - SHow the user name and user type
-        - Create an api enpoint to get current user details
+      + SHow the user name and user type
+        + Create an api enpoint to get current user details
+    + Client code refactor
   - Apartmens / Maps Layout
     - Filtering -> Decide server side or client side. -> Server Side better
   - Edit / Delete / Create Apartment screen

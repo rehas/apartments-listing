@@ -1,6 +1,6 @@
 import * as request from 'superagent'
 import {baseUrl} from '../constants'
-import {isExpired, userId } from '../jwt'
+import {userId } from '../jwt'
 
 
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
