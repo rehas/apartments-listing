@@ -12,8 +12,12 @@ Phase2 - Client
  HERE=> Design Layout
   - Login / SignUp Page
     + Form simple layout and simple functionality
-    - Form actual signup / login process
-    - Form layout fix in grid
+    + Form actual signup / login process
+    + Form layout fix in grid
+    - Login / Signup success process
+      - Redirect to another page
+      - SHow the user name and user type
+      - Show the logout button
   - Apartmens / Maps Layout
     - Filtering -> Decide server side or client side. -> Server Side better
   - Edit / Delete / Create Apartment screen
