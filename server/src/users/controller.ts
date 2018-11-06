@@ -1,4 +1,4 @@
-import {JsonController, Body, Post, BadRequestError, Authorized, Delete, Param, Patch} from 'routing-controllers'
+import {JsonController, Body, Post, BadRequestError, Authorized, Delete, Param, Patch, CurrentUser, Get, UnauthorizedError} from 'routing-controllers'
 import User from './entity';
 import { sign } from '../jwt';
 
@@ -112,6 +112,21 @@ export default class UserController{
 
     return userToBeEdited.save()
 
+  }
+
+  @Authorized(["admin", "realtor", "client"])
+  @Get('/users/:userid([0-9]+)')
+  async getCurrentUser(
+    @Param('userid') userid: number,
+    @CurrentUser() currentUser : User
+  ){
+
+    if(currentUser.id !==userid){
+      throw new UnauthorizedError("Token owner and requested userData don't match")
+    }
+
+    return currentUser
+    
   }
 
 }

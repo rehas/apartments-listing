@@ -36,6 +36,9 @@ class App extends Component {
             onClick={this.handleLogout}
           > Logout UserId: {this.props.currentUser.id}</Button></span>
           }
+          <span>
+            {this.props.currentUserDetails && this.props.currentUserDetails.fullName}
+          </span>
         </header>
         <main>
           <Route exact path='/loginsignup' component={LoginSignUp}/>
@@ -48,7 +51,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser : state.currentUser
+    currentUser : state.currentUser,
+    currentUserDetails : state.currentUserDetails,
   }
 }
 export default  compose(

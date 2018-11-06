@@ -1,6 +1,6 @@
 import * as request from 'superagent'
 import {baseUrl} from '../constants'
-// import {isExpired, userId } from '../jwt'
+import {isExpired, userId } from '../jwt'
 
 
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
@@ -8,6 +8,7 @@ export const USER_LOGOUT = 'USER_LOGOUT'
 export const USER_LOGIN_FAILED = 'USER_LOGIN_FAILED'
 export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS'
 export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED'
+export const GET_CURRENT_USER = 'GET_CURRENT_USER'
 
 const userLoginSuccess = (login) => ({
   type: USER_LOGIN_SUCCESS,
@@ -26,6 +27,11 @@ const userSignUpSuccess = () => ({
   type: USER_SIGNUP_SUCCESS
 })
 
+const getCurrentUserSuccess = (userData) => ({
+  type: GET_CURRENT_USER,
+  payload: userData
+})
+
 export const login = (email, password) => (dispatch) => {
   return Promise.resolve (request
     .post(`${baseUrl}/users/login`)
@@ -33,6 +39,7 @@ export const login = (email, password) => (dispatch) => {
     .then(response => {
       console.log(response)
       dispatch(userLoginSuccess(response.body))
+      dispatch(getCurrentUser(userId(response.body.jwt), response.body.jwt))
       }
     )
     .catch(err=> {
@@ -63,4 +70,15 @@ export const signup = (newUserData) => (dispatch) => {
     })
 }
 
+export const getCurrentUser = (userid, jwt)=> (dispatch) =>{
+  request
+    .get(`${baseUrl}/users/${userid}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(response => 
+      {
+        console.log(response.body);
+        dispatch(getCurrentUserSuccess(response.body))
+      })
+    .catch(err=> console.log(err))
+}
 
