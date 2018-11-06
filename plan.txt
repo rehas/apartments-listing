@@ -9,15 +9,20 @@ Phase2 - Client
 
  + SetUp React - App
  + Add redux / redux thunk - superagent - redux-devtools
- HERE=> Design Layout
+ - Design Layout
   - Login / SignUp Page
     + Form simple layout and simple functionality
     + Form actual signup / login process
     + Form layout fix in grid
     - Login / Signup success process
-      - Redirect to another page
+      + Redirect to another page
+      + Handle enter button submit. 
+      HERE=> Show the logout button
+        +implement logout functionality
+          + redirect to login page after logout
+          + clear user JWT data
       - SHow the user name and user type
-      - Show the logout button
+        - Create an api enpoint to get current user details
   - Apartmens / Maps Layout
     - Filtering -> Decide server side or client side. -> Server Side better
   - Edit / Delete / Create Apartment screen
