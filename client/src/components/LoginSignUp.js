@@ -58,20 +58,36 @@ class LoginSignUp extends PureComponent  {
     e.preventDefault()
     const {email, password} = this.state
     this.props.login( email, password )
+      .then(x=>{
+          console.log(x)
+          if(this.props.currentUser !== null){
+            this.props.history.push('/logged')
+          }
+        
+      })
+    
   }
 
   handleLogout = (e) => {
     e.preventDefault()
     this.props.logout();
   }
+
+  componentDidMount = () =>{
+    if(this.props.currentUser !== null){
+      this.props.history.push('/logged')
+    }
+  }
   
   render(){
     const {classes} = this.props
-
-  return (
-<React.Fragment>
-
-    <div>
+    if(this.props.currentUser !== null){
+      this.props.history.push('/logged')
+      return (<div></div>)
+    }else{
+      return (
+        <React.Fragment>
+            <div>
       {/* <form onSubmit={this.handleSubmit}>
       <Input
         onChange={this.handleChange}
@@ -115,7 +131,7 @@ class LoginSignUp extends PureComponent  {
       <CssBaseline>
         <main className={classes.layout}>
         <Button
-        type="submit"
+        type="button"
         fullWidth
         variant="contained"
         className={classes.cancel}
@@ -128,18 +144,17 @@ class LoginSignUp extends PureComponent  {
       </div>
     
     </div>
-
-<CssBaseline />
-{!this.state.signup && 
-<main className={classes.layout}>
-  <Paper className={classes.paper}>
-    <Avatar className={classes.avatar}>
-      <LockIcon />
-    </Avatar>
-    <Typography component="h1" variant="h5">
-      Sign in
-    </Typography>
-    <form className={classes.form} onSubmit={this.handleSubmit}>
+              <CssBaseline />
+              {!this.state.signup && 
+              <main className={classes.layout}>
+                <Paper className={classes.paper}>
+                  <Avatar className={classes.avatar}>
+                    <LockIcon />
+                  </Avatar>
+                  <Typography component="h1" variant="h5">
+                    Sign in
+                  </Typography>
+                  <form className={classes.form} onSubmit={this.handleSubmit}>
       <FormControl margin="normal" required fullWidth>
         <InputLabel htmlFor="email">Email Address</InputLabel>
         <Input autoComplete="email" autoFocus  onChange={this.handleChange}
@@ -185,12 +200,12 @@ class LoginSignUp extends PureComponent  {
         Don't have an account? - Sign UP
       </Button>
     </form>
-  </Paper>
-</main>
-}
-</React.Fragment>
-
-    )
+                </Paper>
+              </main>
+              }
+        </React.Fragment>
+      )
+    }
   }
 }
 
