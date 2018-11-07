@@ -43,6 +43,7 @@ class App extends Component {
         </header>
         <main id="main">
           <Route exact path='/loginsignup' component={LoginSignUp}/>
+          <Route exact path='/' component={LoginSignUp}/>
           <Route exact path='/apartments' component={MainPage}/>
         </main>
         

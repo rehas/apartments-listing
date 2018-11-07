@@ -1,13 +1,27 @@
 import React, {PureComponent} from 'react'
 import ListItem from './ListItem';
+import { connect } from 'react-redux';
+import {getApartmentsList} from '../../actions/apartments'
 
 class ApartmentsList extends PureComponent{
 
+  componentDidMount(){
+    this.props.getApartmentsList(null, this.props.currentUser.jwt)
+  }
+
   render(){
+    const list = this.props.listedApartments
+    console.log(list)
     return (
       <div>
         List
-        <ListItem data="Passed Data"/>
+        {list && 
+        list.map(item=>{
+          return (
+            <ListItem data={item}/>
+          )
+        })
+        }
       </div>
     )
   }
@@ -17,8 +31,8 @@ class ApartmentsList extends PureComponent{
 const mapStateToProps = state => {
   return {
     currentUser : state.currentUser,
-    listedApartments : state.listedApartments
+    listedApartments : state.apartmentsList
   }
 }
 
-export default ApartmentsList
+export default connect(mapStateToProps,  {getApartmentsList})( ApartmentsList)
