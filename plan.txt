@@ -29,14 +29,14 @@ Phase2 - Client
     + Design layout with grid structure
     - Create components for
       HERE=> list
-        - Create cards for each apartment
-        - Make cards snap on to list with grid
+        + Create cards for each apartment
+        + Make cards snap on to list with grid
         - make pagination => pagination on server side
       - Map
         - Learn to show a map on react
         - Show the map
         - show the markers
-      - 
+      - Add / Edit Apartments
     - Filtering -> Decide server side or client side. -> Server Side better
   - Edit / Delete / Create Apartment screen
   - Admin screen for CRUD -> Users
