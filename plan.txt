@@ -38,6 +38,9 @@ Phase2 - Client
         - show the markers
       - Add / Edit Apartments
     - Filtering -> Decide server side or client side. -> Server Side better
+      + Make sure only 5 apartents are returned from backend
+      + Take sorting options in backend (default by ID reversed)
+      - Put sorting - filtering dropdown menus - buttons - input fields
   - Edit / Delete / Create Apartment screen
   - Admin screen for CRUD -> Users
 
