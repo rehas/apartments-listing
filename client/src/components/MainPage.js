@@ -3,6 +3,7 @@ import Grid from 'react-flexbox-grid/lib/components/Grid';
 import { Row } from 'react-flexbox-grid/lib';
 import { Col } from 'react-flexbox-grid';
 import { withStyles } from '@material-ui/core';
+import ApartmentsList from './List/ApartmentsList';
 
 const styles = theme =>({
   map:{
@@ -16,17 +17,20 @@ const styles = theme =>({
   },
 })
 
-class Apartments extends PureComponent{
+class MainPage extends PureComponent{
   render(){
     const {classes} = this.props
     return (
       <Grid fluid className={classes.root} >
         <Row  className={classes.root}  >
-          <Col className={classes.list} lg={3}>Listing</Col>
+          <Col className={classes.list} lg={3}>
+            Listing
+            <ApartmentsList/>
+          </Col>
           <Col className={classes.map} lg={9}> Map</Col>
         </Row>
       </Grid>)
   }
 }
 
-export default withStyles(styles) (Apartments)
+export default withStyles(styles) (MainPage)

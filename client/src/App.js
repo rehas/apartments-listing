@@ -7,7 +7,7 @@ import {Route, withRouter } from 'react-router-dom'
 import LoginSignUp from './components/LoginSignUp';
 import { Button, withStyles } from '@material-ui/core';
 import { compose } from 'redux';
-import Apartments from './components/Apartments';
+import MainPage from './components/MainPage';
 
 const styles = theme =>({
   button:{
@@ -43,7 +43,7 @@ class App extends Component {
         </header>
         <main id="main">
           <Route exact path='/loginsignup' component={LoginSignUp}/>
-          <Route exact path='/apartments' component={Apartments}/>
+          <Route exact path='/apartments' component={MainPage}/>
         </main>
         
       </div>
