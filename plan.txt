@@ -17,7 +17,7 @@ Phase2 - Client
     - Login / Signup success process
       + Redirect to another page
       + Handle enter button submit. 
-      HERE=> Show the logout button
+      + Show the logout button
         +implement logout functionality
           + redirect to login page after logout
           + clear user JWT data
@@ -25,6 +25,18 @@ Phase2 - Client
         + Create an api enpoint to get current user details
     + Client code refactor
   - Apartmens / Maps Layout
+    + Create path on the client side
+    + Design layout with grid structure
+    - Create components for
+      HERE=> list
+        - Create cards for each apartment
+        - Make cards snap on to list with grid
+        - make pagination => pagination on server side
+      - Map
+        - Learn to show a map on react
+        - Show the map
+        - show the markers
+      - 
     - Filtering -> Decide server side or client side. -> Server Side better
   - Edit / Delete / Create Apartment screen
   - Admin screen for CRUD -> Users
