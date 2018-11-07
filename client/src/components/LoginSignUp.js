@@ -25,7 +25,7 @@ class LoginSignUp extends PureComponent  {
     this.props.login( email, password )
       .then(x=>{
           if(this.props.currentUser !== null){
-            this.props.history.push('/logged')
+            this.props.history.push('/apartments')
           }
       })
   }
@@ -37,14 +37,14 @@ class LoginSignUp extends PureComponent  {
 
   componentDidMount = () =>{
     if(this.props.currentUser !== null){
-      this.props.history.push('/logged')
+      this.props.history.push('/apartments')
     }
   }
   
   render(){
     const {classes} = this.props
     if(this.props.currentUser !== null){
-      this.props.history.push('/logged')
+      this.props.history.push('/apartments')
       return (<div></div>)
     }else{
       return (

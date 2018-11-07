@@ -7,6 +7,7 @@ import {Route, withRouter } from 'react-router-dom'
 import LoginSignUp from './components/LoginSignUp';
 import { Button, withStyles } from '@material-ui/core';
 import { compose } from 'redux';
+import Apartments from './components/Apartments';
 
 const styles = theme =>({
   button:{
@@ -40,8 +41,9 @@ class App extends Component {
             {this.props.currentUserDetails && this.props.currentUserDetails.fullName}
           </span>
         </header>
-        <main>
+        <main id="main">
           <Route exact path='/loginsignup' component={LoginSignUp}/>
+          <Route exact path='/apartments' component={Apartments}/>
         </main>
         
       </div>
