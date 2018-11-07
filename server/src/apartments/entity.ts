@@ -37,7 +37,7 @@ export default class Apartment extends BaseEntity {
   available : Boolean
 
   // TODO: Add valid geolocation coordinates
-  @IsJSON()
+  // @IsJSON()
   @Column({type: 'json', nullable:true})
   geolocation: Geolocation
 

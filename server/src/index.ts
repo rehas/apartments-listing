@@ -21,7 +21,7 @@ useKoaServer(app, {
   ],
   authorizationChecker : async (action: Action, roles: String[]) => {
     console.log(`Authorization checked  - ${roles}`)
-    console.log(action)
+    // console.log(action)
 
     const header: string = action.request.headers.authorization
 

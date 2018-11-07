@@ -6,7 +6,7 @@ import { Between, Not, IsNull } from "typeorm";
 @JsonController()
 export default class ApartmentsController{
   @Authorized(["realtor", "admin"])
-  @Post('/apartments/')
+  @Post('/apartments')
   async createApartment(
     @CurrentUser() user : User,
     @Body() data : Apartment
@@ -17,6 +17,8 @@ export default class ApartmentsController{
     if(!user){
       return new UnauthorizedError("Please login")
     }
+
+    console.log(data)
 
     const newApartment = Apartment.create(data);
     newApartment.user = user;
@@ -32,14 +34,14 @@ export default class ApartmentsController{
     @CurrentUser() user: User,
     @QueryParams() params
   ){
-    console.log(params)
-    console.log(user)
+    // console.log(params)
+    // console.log(user)
 
     if(!user){
       return new UnauthorizedError("Please login")
     }
 
-    let {sizeMax, sizeMin, priceMax, priceMin, norMax, norMin, available, ...rest} = params
+    let {sizeMax, sizeMin, priceMax, priceMin, norMax, norMin, available, id, skip, name, dateAdded,  ...rest} = params
 
     console.log({
       sizeMax: isNaN(sizeMax), 
@@ -81,7 +83,14 @@ export default class ApartmentsController{
 
     
 
-    return await Apartment.find({where: searchQuery})
+    return await Apartment.find({
+      where: searchQuery,
+      order: {
+        id: id===-1 ?  "ASC" : "DESC",
+      },
+      take: 5,
+      skip: skip ? skip : 0
+    })
 
   }
 
