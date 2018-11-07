@@ -12,7 +12,7 @@ const styles = theme=>  ({
     minWidth: '100%',
     backgroundColor : theme.palette.secondary.light,
     marginBottom: '10px',
-    height: '100px',
+    height: '90px',
   },
   title: {
     fontSize: 18,
