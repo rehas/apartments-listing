@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import { Card, CardContent, Typography, withStyles } from '@material-ui/core';
+import { Card, CardContent, Typography, withStyles, Button } from '@material-ui/core';
 
 const styles = theme=>  ({
   cardActive: {
@@ -51,6 +51,9 @@ class ListItem extends PureComponent{
               <Typography>
                 Number Of Rooms : {item.numberOfRooms}
               </Typography>
+              {this.props.canEdit && 
+              <Button>Edit / Delete</Button>
+              }
             </CardContent>
           </Card>
         }
