@@ -5,25 +5,24 @@ const styles = theme=>  ({
   cardActive: {
     minWidth: '100%',
     backgroundColor : theme.palette.primary.light,
-    marginBottom: '10px'
+    marginBottom: '10px',
+    height: '90px',
   },
   cardPassive: {
     minWidth: '100%',
     backgroundColor : theme.palette.secondary.light,
-    marginBottom: '10px'
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    marginBottom: '10px',
+    height: '100px',
   },
   title: {
     fontSize: 18,
-    color: theme.palette.primary.dark
+    color: theme.palette.primary.dark,
+    margin: '1px'
   },
-  pos: {
-    marginBottom: 12,
-  },
+  content: {
+    paddingTop: '0px',
+    paddingBottom: '0px'
+  }
 })
 
 class ListItem extends PureComponent{
@@ -36,7 +35,7 @@ class ListItem extends PureComponent{
         {
           item && 
           <Card className={item.available? classes.cardActive : classes.cardPassive}>
-            <CardContent>
+            <CardContent className={classes.content}>
               <Typography className={classes.title}>
                 Name : {item.name} {!item.available ? " -- Sold Out" : ""}
               </Typography>
