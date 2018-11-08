@@ -81,7 +81,9 @@ export default class ApartmentsController{
 
     console.log(searchQuery)
 
-    
+    const apartmentCount =  await Apartment.count({where: searchQuery})
+
+    console.log(apartmentCount)
 
     return await Apartment.find({
       where: searchQuery,

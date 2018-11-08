@@ -1,5 +1,5 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Timestamp } from "typeorm";
-import { IsString, IsNumber, IsBoolean, IsJSON } from "class-validator";
+import { IsString, IsNumber, IsBoolean } from "class-validator";
 import User from "../users/entity";
 
 type Geolocation = {
