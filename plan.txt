@@ -28,10 +28,10 @@ Phase2 - Client
     + Create path on the client side
     + Design layout with grid structure
     - Create components for
-      HERE=> list
+      - list
         + Create cards for each apartment
         + Make cards snap on to list with grid
-        - make pagination => pagination on server side
+        HERE=> make pagination => pagination on server side
       - Map
         - Learn to show a map on react
         - Show the map
