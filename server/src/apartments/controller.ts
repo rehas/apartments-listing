@@ -41,6 +41,9 @@ export default class ApartmentsController{
       return new UnauthorizedError("Please login")
     }
 
+    console.log("params:\n")
+    console.log(params)
+
     let {sizeMax, sizeMin, priceMax, priceMin, norMax, norMin, available, id, skip, name, dateAdded,  ...rest} = params
 
     console.log({
@@ -85,14 +88,28 @@ export default class ApartmentsController{
 
     console.log(apartmentCount)
 
-    return await Apartment.find({
+    const lastPage = apartmentCount%5 !==0 ? Math.floor(apartmentCount / 5) : Math.floor(apartmentCount / 5) -1
+
+    console.log(`lastPage - ${lastPage}`)
+
+    if( apartmentCount - (skip * 5) <= 0 ){
+      skip = lastPage
+    }
+    console.log(`skip - ${skip}`)
+
+    const result = await Apartment.find({
       where: searchQuery,
       order: {
         id: id===-1 ?  "ASC" : "DESC",
       },
       take: 5,
-      skip: skip ? skip : 0
+      skip: skip ? skip*5 : 0
     })
+
+    return {
+      page : result, 
+      count: apartmentCount
+    } 
 
   }
 
