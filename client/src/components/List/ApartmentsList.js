@@ -54,7 +54,7 @@ class ApartmentsList extends PureComponent{
         {list && currentUserDetails && 
         list.map(item=>{
           return (
-            <ListItem data={item} canEdit={this.props.currentUserDetails.userType!=='client'}/>
+            <ListItem key={item.id} data={item} canEdit={this.props.currentUserDetails.userType!=='client'}/>
           )
         })
         }

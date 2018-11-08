@@ -4,7 +4,7 @@ import { Row } from 'react-flexbox-grid/lib';
 import { Col } from 'react-flexbox-grid';
 import { withStyles } from '@material-ui/core';
 import ApartmentsList from './List/ApartmentsList';
-import SimpleMap from './Map/MainMap';
+import MainMap from './Map/MainMap';
 
 const styles = theme =>({
   map:{
@@ -29,7 +29,7 @@ class MainPage extends PureComponent{
             <ApartmentsList/>
           </Col>
           <Col className={classes.map} lg={9}> Map
-            <SimpleMap/>
+            <MainMap/>
           </Col>
         </Row>
       </Grid>)

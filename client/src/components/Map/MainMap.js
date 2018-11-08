@@ -1,9 +1,32 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { connect } from 'react-redux';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const Marker = ({ text, style }) => <div style={style}>{text}</div>;
 
-class SimpleMap extends Component {
+const K_WIDTH  = 50;
+  const K_HEIGHT = 50;
+
+const greatPlaceStyle = {
+  // initially any map object has left top corner at lat lng coordinates
+  // it's on you to set object origin to 0,0 coordinates
+  position: 'absolute',
+  width: K_WIDTH,
+  height: K_HEIGHT,
+  left: -K_WIDTH / 2,
+  top: -K_HEIGHT / 2,
+
+  border: '5px solid #f44336',
+  borderRadius: K_HEIGHT,
+  backgroundColor: 'white',
+  textAlign: 'center',
+  color: '#3f51b5',
+  fontSize: 16,
+  fontWeight: 'bold',
+  padding: 2
+};
+
+class MainMap extends Component {
   static defaultProps = {
     center: {
       lat: 52.36,
@@ -21,15 +44,32 @@ class SimpleMap extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text={'Kreyser Avrora'}
+        {this.props.listedApartments && 
+        this.props.listedApartments.page.map(apartment => {
+          return (
+            <Marker
+            key={apartment.id}
+            lat={apartment.lat}
+            lng={apartment.lon}
+            style= {greatPlaceStyle}
+            text={apartment.id}
           />
+          )
+        })
+        }
+          
         </GoogleMapReact>
       </div>
     );
   }
 }
 
-export default SimpleMap;
+const mapStateToProps = state => {
+  return {
+    // currentUser : state.currentUser,
+    listedApartments : state.apartmentsList,
+    // currentUserDetails : state.currentUserDetails
+  }
+}
+
+export default connect(mapStateToProps)( MainMap);
