@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {getApartmentsList} from '../../actions/apartments'
 import {getCurrentUser} from '../../actions/users'
 import { Button, Typography } from '@material-ui/core';
-import { Grid, Col } from 'react-flexbox-grid';
+import { Col } from 'react-flexbox-grid';
 import Row from 'react-flexbox-grid/lib/components/Row';
 
 class ApartmentsList extends PureComponent{
@@ -24,30 +24,31 @@ class ApartmentsList extends PureComponent{
 
       const maxPage = count %5 === 0 ? count / 5 : Math.floor(count / 5) +1
 
-      console.log(`count = ${count}`)
-      console.log(`maxPage = ${maxPage}`)
-
       if(this.state.page === maxPage){
         return
       }
       this.setState({
         page: this.state.page +1
-      }, () => this.props.getApartmentsList({skip: this.state.page-1}, this.props.currentUser.jwt) )
-      // this.props.getApartmentsList({skip: this.state.page-1}, this.props.currentUser.jwt)
+        }, 
+        () => this.props.getApartmentsList(
+            {skip: this.state.page-1}, this.props.currentUser.jwt)
+          )
     }else{
       if(this.state.page === 1){
         return
       }
       this.setState({
         page: this.state.page -1
-      }, () => this.props.getApartmentsList({skip: this.state.page-1}, this.props.currentUser.jwt) )
+      }, 
+      () => this.props.getApartmentsList(
+          {skip: this.state.page-1}, this.props.currentUser.jwt)
+        )
     }
   }
 
   render(){
     const list = this.props.listedApartments && this.props.listedApartments.page
     const currentUserDetails = this.props.currentUserDetails
-    console.log(list)
     return (
       <div>
         List
@@ -63,9 +64,6 @@ class ApartmentsList extends PureComponent{
             <Col lg={4}> <Typography variant="body2">{this.state.page}</Typography> </Col>
             <Col lg={4}> <Button onClick={ ()=> this.handlePage('next')}>{">"}</Button> </Col>
           </Row>
-        
-        
-        
       </div>
     )
   }
