@@ -2,11 +2,6 @@ import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColu
 import { IsString, IsNumber, IsBoolean } from "class-validator";
 import User from "../users/entity";
 
-type Geolocation = {
-  lat: number,
-  lon: number
-}
-
 @Entity()
 export default class Apartment extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -38,8 +33,16 @@ export default class Apartment extends BaseEntity {
 
   // TODO: Add valid geolocation coordinates
   // @IsJSON()
-  @Column({type: 'json', nullable:true})
-  geolocation: Geolocation
+  // @Column({type: 'json', nullable:true})
+  // geolocation: Geolocation
+
+  @IsNumber()
+  @Column({type: 'double precision', nullable:false})
+  lat : number
+
+  @IsNumber()
+  @Column({type: 'double precision', nullable:false})
+  lon : number
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   dateAdded: Timestamp
@@ -47,6 +50,5 @@ export default class Apartment extends BaseEntity {
   @ManyToOne(_=>User, user=> user.apartments, {onDelete:"CASCADE"})
   @JoinColumn({name: 'user_id'})
   user: User;
-
 
 }
