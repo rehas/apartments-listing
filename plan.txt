@@ -39,6 +39,13 @@ Phase2 - Client
         + show the markers
           - Show differnt color if not available
       - Add / Edit Apartments
+        - Fix button position on card
+        - Check user type eligibility
+          - If client, send to logout
+          - Else show apartment details
+            - Edit Button makes form data editable
+            - Edit button summons save button
+            - Delete button alerts and then deletes, and then sends the user back to apartments
     - Filtering -> Decide server side or client side. -> Server Side better
       + Make sure only 5 apartents are returned from backend
       + Take filtering options in backend (default by ID reversed)
@@ -57,7 +64,7 @@ Phase2 - Client
           + 0-1
           + 2-3
           + 3+
-  - Edit / Delete / Create Apartment screen
+  HERE=> Edit / Delete / Create Apartment screen
   - Admin screen for CRUD -> Users
 
  - Write down components
