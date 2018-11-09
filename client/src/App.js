@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {logout} from './actions/users'
-import {userId} from './jwt'
+import {userId, isExpired} from './jwt'
 import './App.css';
 import {Route, withRouter } from 'react-router-dom'
 import LoginSignUp from './components/LoginSignUp';
@@ -23,7 +23,11 @@ class App extends Component {
     this.props.history.push('/loginsignup')
   }
   render() {
-    const {classes} = this.props
+    const {classes, currentUser} = this.props
+
+    if(!currentUser || isExpired(currentUser.jwt)){
+      this.props.logout()
+    }
     
     return (
       <div className="App">
