@@ -4,10 +4,16 @@ import { isExpired } from '../jwt';
 import { logout } from './users';
 
 export const GET_APARTMENTS_LIST = 'GET_APARTMENTS_LIST'
+export const GET_APARTMENT_ID = 'GET_APARTMENT_ID'
 
 const getApartmentsListSuccess = (apartmentsList) =>({
   type: GET_APARTMENTS_LIST,
   payload: apartmentsList
+})
+
+const getApartmentIdSuccess = (apartment) =>({
+  type: GET_APARTMENT_ID,
+  payload: apartment
 })
 
 export const getApartmentsList = (filterData, jwt) => (dispatch) =>{
@@ -56,3 +62,21 @@ export const getApartmentsList = (filterData, jwt) => (dispatch) =>{
     })
     .catch(err => console.log(err))
 }
+export const getApartmentId = (apartmentId, jwt) => (dispatch) =>{
+
+  if (isExpired(jwt)){
+    dispatch(logout());
+  }
+  
+  request
+    .get(`${baseUrl}/apartments/${apartmentId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(response => {
+      // console.log(response.body)
+      dispatch(getApartmentIdSuccess(response.body))
+    })
+    .catch(err => console.log(err))
+
+  }
+
+

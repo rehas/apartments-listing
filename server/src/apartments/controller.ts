@@ -178,4 +178,15 @@ export default class ApartmentsController{
 
   } 
 
+  @Authorized(["realtor", "admin"])
+  @Get('/apartments/:id([0-9]+)')
+  async getApartment(
+    @Param('id') id : number,
+    @CurrentUser() user: User
+  ){
+    if(!user){
+      return new UnauthorizedError("Please login")
+    }
+    return await Apartment.findOne(id)
+  }
 }
