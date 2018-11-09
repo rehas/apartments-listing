@@ -65,12 +65,12 @@ export default class ApartmentsController{
 
     // Eliminate undefined or wrong query params also convert strings into proper primitive types (int, bool)
 
-    sizeMax   = !isNaN(sizeMax)  ? sizeMax  : Math.pow(2, 16)
-    sizeMin   = !isNaN(sizeMin)  ? sizeMin  : 0
-    priceMax  = !isNaN(priceMax) ? priceMax : Math.pow(2, 16)
-    priceMin  = !isNaN(priceMin) ? priceMin : 0
-    norMax    = !isNaN(norMax)  ? norMax   : Math.pow(2, 16)
-    norMin    = !isNaN(norMin)  ? norMin   : 0
+    sizeMax   = (sizeMax && !isNaN(sizeMax))  ? sizeMax  : Math.pow(2, 16)
+    sizeMin   = (sizeMin && !isNaN(sizeMin))  ? sizeMin  : 0
+    priceMax  = (priceMax && !isNaN(priceMax)) ? priceMax : Math.pow(2, 16)
+    priceMin  = (priceMin && !isNaN(priceMin)) ? priceMin : 0
+    norMax    = (norMax && !isNaN(norMax))  ? norMax   : Math.pow(2, 16)
+    norMin    = (norMin && !isNaN(norMin))  ? norMin   : 0
     available = available === 'true' ? true : available === 'false' ? false : null;
 
     
@@ -87,6 +87,13 @@ export default class ApartmentsController{
     const apartmentCount =  await Apartment.count({where: searchQuery})
 
     console.log(apartmentCount)
+
+    if(!apartmentCount){
+      return {
+        page : [],
+        count : 0
+      }
+    }
 
     const lastPage = apartmentCount%5 !==0 ? Math.floor(apartmentCount / 5) : Math.floor(apartmentCount / 5) -1
 

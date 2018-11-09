@@ -27,9 +27,25 @@ const styles = theme=>  ({
 
 class ListItem extends PureComponent{
   render(){
-    console.log(this.props)
+    // console.log(this.props)
     const item = this.props.data
     const {classes} = this.props
+    const {noApartments} = this.props
+
+    if(noApartments){
+      return (
+        <div>
+          <Card className={classes.cardPassive}>
+            <CardContent className={classes.content}>
+              <Typography className={classes.title}>
+                No Apartments Found! 
+              </Typography>
+           </CardContent>
+           </Card>   
+        </div>
+      )
+    }
+
     return (
       <div>
         {
