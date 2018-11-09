@@ -11,6 +11,7 @@ Phase2 - Client
  + Add redux / redux thunk - superagent - redux-devtools
  - Design Layout
   - Login / SignUp Page
+    + Check if JWT expired and redirect to login!
     + Form simple layout and simple functionality
     + Form actual signup / login process
     + Form layout fix in grid
@@ -36,11 +37,26 @@ Phase2 - Client
         + Learn to show a map on react
         + Show the map
         + show the markers
+          - Show differnt color if not available
       - Add / Edit Apartments
     - Filtering -> Decide server side or client side. -> Server Side better
       + Make sure only 5 apartents are returned from backend
-      + Take sorting options in backend (default by ID reversed)
-      HERE=> Put sorting - filtering dropdown menus - buttons - input fields
+      + Take filtering options in backend (default by ID reversed)
+      - Put- filtering dropdown menus - buttons - input fields
+        + size
+          + 0 - 50m2
+          + 51 - 100m2
+          + 101 - 150m2
+          + 151 + m2 
+        + price
+          + 0 - 500 €
+          + 501 - 1000 €
+          + 1000 - 1500€
+          + 1501+ ‹ 
+        + number of rooms
+          + 0-1
+          + 2-3
+          + 3+
   - Edit / Delete / Create Apartment screen
   - Admin screen for CRUD -> Users
 
@@ -52,7 +68,9 @@ Phase2 - Client
   + Show pins
   - Make pins clickable / show popover info
 -------------
-
+EXTRAS:
+  - Sorting 
+-------------
 Backend
  Entities
  - Draw out entity relationShips

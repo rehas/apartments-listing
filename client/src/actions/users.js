@@ -37,7 +37,7 @@ export const login = (email, password) => (dispatch) => {
     .post(`${baseUrl}/users/login`)
     .send({email, password})
     .then(response => {
-      console.log(response)
+      // console.log(response)
       dispatch(userLoginSuccess(response.body))
       dispatch(getCurrentUser(userId(response.body.jwt), response.body.jwt))
       }
@@ -61,7 +61,7 @@ export const signup = (newUserData) => (dispatch) => {
       return Promise.resolve( response.body)
     })
     .then(data=>{
-      console.log(data)
+      // console.log(data)
       dispatch(login(data.email, newUserData.password))
     })
     .catch(err => {
@@ -76,7 +76,7 @@ export const getCurrentUser = (userid, jwt)=> (dispatch) =>{
     .set('Authorization', `Bearer ${jwt}`)
     .then(response => 
       {
-        console.log(response.body);
+        // console.log(response.body);
         dispatch(getCurrentUserSuccess(response.body))
       })
     .catch(err=> console.log(err))
