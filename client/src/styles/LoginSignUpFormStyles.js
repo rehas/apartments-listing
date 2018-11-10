@@ -1,3 +1,5 @@
+import red from '@material-ui/core/colors/red';
+
 const LoginSignUpFormStyles =  (theme) => ({
     layout: {
       width: 'auto',
@@ -28,11 +30,15 @@ const LoginSignUpFormStyles =  (theme) => ({
     submit: {
       marginTop: theme.spacing.unit * 3,
     },
+    delete: {
+      marginTop: theme.spacing.unit * 3,
+      backgroundColor : red[300],
+      color: "white"
+    },
     cancel: {
       backgroundColor: theme.palette.secondary.main,
       color: "white",
       marginTop: theme.spacing.unit * 3,
-  
     }
   });
 

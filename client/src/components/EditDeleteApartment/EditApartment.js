@@ -1,10 +1,11 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
 import {getCurrentUser, logout} from '../actions/users'
-import {getApartmentId, editApartment} from '../actions/apartments'
+import {getApartmentId, editApartment, deleteApartment} from '../actions/apartments'
 import LoginSignUpFormStyles from '../styles/LoginSignUpFormStyles';
 import EditIcon from '@material-ui/icons/Edit';
 import { CssBaseline, Paper, Avatar, Typography, FormControl, InputLabel, Input, withStyles, NativeSelect, Button } from '@material-ui/core';
+import { Row, Col } from 'react-flexbox-grid/lib';
 
 const styles = LoginSignUpFormStyles
 
@@ -12,7 +13,8 @@ const styles = LoginSignUpFormStyles
 class EditApartment extends PureComponent{
 
   state = {
-
+    editComplete : false,
+    data : {}
   }
 
   constructor (props) {
@@ -32,13 +34,27 @@ class EditApartment extends PureComponent{
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name] : e.target.value
+      data:{
+        [e.target.name] : e.target.value
+      }
     })
   }
 
   handleSubmit = (e) =>{
     e.preventDefault();
-    this.props.editApartment(this.props.match.params.id, this.props.currentUser.jwt, this.state)
+    this.props.editApartment(this.props.match.params.id, this.props.currentUser.jwt, this.state.data)
+    this.setState({
+      editComplete : !this.state.editComplete
+    })
+  }
+
+  handleCancel = (e) =>{
+    this.props.history.push('/apartments')
+  }
+
+  handleDelete = (e) =>{
+    this.props.deleteApartment(this.props.match.params.id, this.props.currentUser.jwt)
+    this.props.history.push('/apartments')
   }
 
   render(){
@@ -66,9 +82,9 @@ class EditApartment extends PureComponent{
         {ad &&
           <main className={classes.layout}>
             <Paper className={classes.paper}>
-              <Avatar className={classes.avatar}>
+              {/* <Avatar className={classes.avatar}>
                 <EditIcon />
-              </Avatar>
+              </Avatar> */}
               <Typography component="h1" variant="h5">
                 Edit or Delete Apartment : <br/> {ad.name}
               </Typography>
@@ -80,7 +96,7 @@ class EditApartment extends PureComponent{
                   id="name"
                   type="name"
                   name="name"
-                  defaultValue={ad.name}
+                  defaultValue={ad ?ad.name : ""}
                   placeholder="Apartment Name"
                   required={true}/>
                 </FormControl>
@@ -92,7 +108,7 @@ class EditApartment extends PureComponent{
                     type="description"
                     id="description"
                     name="description"
-                    defaultValue={ad.description}
+                    defaultValue={ad ?ad.description : ""}
                     placeholder="description"
                     margin="dense"
                     required={true}
@@ -106,13 +122,13 @@ class EditApartment extends PureComponent{
                     type="text"
                     id="floorAreaSize"
                     name="floorAreaSize"
-                    defaultValue={ad.floorAreaSize}
+                    defaultValue={ad ?ad.floorAreaSize : ""}
                     placeholder="Floor Area Size"
                     margin="dense"
                     required={true}
                   />
                 </FormControl>
-                <FormControl margin="normal" required halfWidth>
+                <FormControl margin="normal" required>
                   <InputLabel htmlFor="numberOfRooms">Number Of Rooms</InputLabel>
                   <Input
                     onChange={this.handleChange}
@@ -120,13 +136,13 @@ class EditApartment extends PureComponent{
                     type="text"
                     id="numberOfRooms"
                     name="numberOfRooms"
-                    defaultValue={ad.numberOfRooms}
+                    defaultValue={ad ?ad.numberOfRooms : ""}
                     placeholder="Number Of Rooms"
                     margin="dense"
                     required={true}
                   />
                 </FormControl>
-                <FormControl margin="normal" required halfWidth>
+                <FormControl margin="normal" required>
                   <InputLabel htmlFor="pricePerMonth">Price Per Month</InputLabel>
                   <Input
                     onChange={this.handleChange}
@@ -134,13 +150,13 @@ class EditApartment extends PureComponent{
                     type="text"
                     id="pricePerMonth"
                     name="pricePerMonth"
-                    defaultValue={ad.pricePerMonth}
+                    defaultValue={ad ?ad.pricePerMonth : ""}
                     placeholder="Price Per Month"
                     margin="dense"
                     required={true}
                   />
                 </FormControl>
-                <FormControl margin="normal" required halfWidth>
+                <FormControl margin="normal" required >
                   <InputLabel htmlFor="lat">Latitude</InputLabel>
                   <Input
                     onChange={this.handleChange}
@@ -148,13 +164,13 @@ class EditApartment extends PureComponent{
                     type="text"
                     id="lat"
                     name="lat"
-                    defaultValue={ad.lat}
+                    defaultValue={ad ?ad.lat : ""}
                     placeholder="Latitude"
                     margin="dense"
                     required={true}
                   />
                 </FormControl>
-                <FormControl margin="normal" required halfWidth>
+                <FormControl margin="normal" required >
                   <InputLabel htmlFor="lon">Longitude</InputLabel>
                   <Input
                     onChange={this.handleChange}
@@ -162,7 +178,7 @@ class EditApartment extends PureComponent{
                     type="text"
                     id="lon"
                     name="lon"
-                    defaultValue={ad.lon}
+                    defaultValue={ad ?ad.lon : ""}
                     placeholder="Longitude"
                     margin="dense"
                     required={true}
@@ -170,7 +186,7 @@ class EditApartment extends PureComponent{
                 </FormControl>
                 <FormControl margin="normal" required fullWidth>
                   <NativeSelect
-                  defaultValue={ad.available}
+                  defaultValue={ad ?ad.available : ""}
                   input={<Input name="available" id="available" />}
                   onChange={this.handleChange}
                 >
@@ -178,13 +194,36 @@ class EditApartment extends PureComponent{
                   <option value={false}>Inavailable</option>
                 </NativeSelect>
                 </FormControl>
+                <Row lg={12}>
+                  <Col lg={6}>
+                    <Button 
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className={classes.submit}
+                      disabled={this.state.editComplete}
+                      type="submit">
+                      SAVE
+                    </Button>
+                  </Col>
+                  <Col lg={6}>
+                    <Button 
+                      fullWidth
+                      variant="contained"
+                      className={classes.delete}
+                      // disabled={this.state.editComplete}
+                      onClick={this.handleDelete}>
+                      DELETE
+                    </Button>
+                  </Col>
+                </Row>
                 <Button 
                   fullWidth
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   className={classes.submit}
-                  type="submit">
-                  SAVE
+                  onClick={this.handleCancel}>
+                  {!this.state.editComplete ? 'CANCEL' : 'BACK TO APARTMENTS'}
                 </Button>
               </form>
             </Paper>
@@ -203,6 +242,9 @@ const mapStateToProps = state =>{
   }
 }
 
+const mapDispatchToProps = {
+  getCurrentUser, logout, getApartmentId, editApartment, deleteApartment
+}
 
 
-export default connect(mapStateToProps, {getCurrentUser, logout, getApartmentId, editApartment})(withStyles(styles) (EditApartment))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles) (EditApartment))

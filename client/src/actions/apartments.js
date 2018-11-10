@@ -73,7 +73,7 @@ export const getApartmentId = (apartmentId, jwt) => (dispatch) =>{
     .set('Authorization', `Bearer ${jwt}`)
     .then(response => {
       // console.log(response.body)
-      dispatch(getApartmentIdSuccess(response.body))
+      dispatch(getApartmentIdSuccess(response.body));
     })
     .catch(err => console.log(err))
 
@@ -90,8 +90,21 @@ export const editApartment = (apartmentId, jwt, apartmentData) => (dispatch) =>{
     .send(apartmentData)
     .then(response=>{
       console.log(response)
+      dispatch(getApartmentsList({}, jwt));
+      dispatch(getApartmentId(apartmentId, jwt))
     })
     .catch(err=> console.log(err))
 }
 
+export const deleteApartment = (apartmentId, jwt) => (dispatch) =>{
+  if (isExpired(jwt)){
+    dispatch(logout());
+  }
+  
+  request
+    .delete(`${baseUrl}/apartments/${apartmentId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(response => console.log(response))
+    .catch(err=> console.log(err))
+}
 

@@ -8,7 +8,7 @@ import LoginSignUp from './components/LoginSignUp';
 import { Button, withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import MainPage from './components/MainPage';
-import EditApartment from './components/EditApartment';
+import EditApartment from './components/EditDeleteApartment/EditApartment';
 
 const styles = theme =>({
   button:{
