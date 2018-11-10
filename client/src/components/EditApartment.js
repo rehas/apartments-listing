@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getCurrentUser, logout} from '../actions/users'
 import {getApartmentId, editApartment} from '../actions/apartments'
 import LoginSignUpFormStyles from '../styles/LoginSignUpFormStyles';
-import LockIcon from '@material-ui/icons/LockOutlined';
+import EditIcon from '@material-ui/icons/Edit';
 import { CssBaseline, Paper, Avatar, Typography, FormControl, InputLabel, Input, withStyles, NativeSelect, Button } from '@material-ui/core';
 
 const styles = LoginSignUpFormStyles
@@ -59,7 +59,6 @@ class EditApartment extends PureComponent{
 
     return (
         <React.Fragment>
-        This is editing / deleting apartment number {this.props.match.params.id}
         {!ad && 
           <div>Apartment Not Found</div>
         }
@@ -68,10 +67,10 @@ class EditApartment extends PureComponent{
           <main className={classes.layout}>
             <Paper className={classes.paper}>
               <Avatar className={classes.avatar}>
-                <LockIcon />
+                <EditIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Edit or Delete Apartment : {ad.name}
+                Edit or Delete Apartment : <br/> {ad.name}
               </Typography>
               <form className={classes.form} onSubmit={this.handleSubmit}>
                 <FormControl margin="normal" required fullWidth>
@@ -113,7 +112,7 @@ class EditApartment extends PureComponent{
                     required={true}
                   />
                 </FormControl>
-                <FormControl margin="normal" required fullWidth>
+                <FormControl margin="normal" required halfWidth>
                   <InputLabel htmlFor="numberOfRooms">Number Of Rooms</InputLabel>
                   <Input
                     onChange={this.handleChange}
@@ -127,7 +126,7 @@ class EditApartment extends PureComponent{
                     required={true}
                   />
                 </FormControl>
-                <FormControl margin="normal" required fullWidth>
+                <FormControl margin="normal" required halfWidth>
                   <InputLabel htmlFor="pricePerMonth">Price Per Month</InputLabel>
                   <Input
                     onChange={this.handleChange}
@@ -141,7 +140,7 @@ class EditApartment extends PureComponent{
                     required={true}
                   />
                 </FormControl>
-                <FormControl margin="normal" required fullWidth>
+                <FormControl margin="normal" required halfWidth>
                   <InputLabel htmlFor="lat">Latitude</InputLabel>
                   <Input
                     onChange={this.handleChange}
@@ -155,7 +154,7 @@ class EditApartment extends PureComponent{
                     required={true}
                   />
                 </FormControl>
-                <FormControl margin="normal" required fullWidth>
+                <FormControl margin="normal" required halfWidth>
                   <InputLabel htmlFor="lon">Longitude</InputLabel>
                   <Input
                     onChange={this.handleChange}
