@@ -79,4 +79,19 @@ export const getApartmentId = (apartmentId, jwt) => (dispatch) =>{
 
   }
 
+export const editApartment = (apartmentId, jwt, apartmentData) => (dispatch) =>{
+  if (isExpired(jwt)){
+    dispatch(logout());
+  }
+  
+  request
+    .patch(`${baseUrl}/apartments/${apartmentId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send(apartmentData)
+    .then(response=>{
+      console.log(response)
+    })
+    .catch(err=> console.log(err))
+}
+
 
