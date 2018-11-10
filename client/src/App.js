@@ -8,7 +8,8 @@ import LoginSignUp from './components/LoginSignUp';
 import { Button, withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import MainPage from './components/MainPage';
-import EditApartment from './components/EditDeleteApartment/EditApartment';
+import EditApartment from './components/crudApartment/EditApartment';
+import CreateApartment from './components/crudApartment/CreateApartment';
 
 const styles = theme =>({
   button:{
@@ -50,6 +51,7 @@ class App extends Component {
           <Route exact path='/loginsignup' component={LoginSignUp}/>
           <Route exact path='/' component={LoginSignUp}/>
           <Route exact path='/apartments' component={MainPage}/>
+          <Route exact path='/newapartment' component={CreateApartment}/>
           <Route exact path='/apartments/:id' component={EditApartment}/>
         </main>
         
