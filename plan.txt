@@ -64,10 +64,10 @@ Phase2 - Client
           + 0-1
           + 2-3
           + 3+
-  HERE=> Edit / Delete / Create Apartment screen
+  - Edit / Delete / Create Apartment screen
       + Set the path
       - Form Component for edit / delete
-        -redirect from list
+        + redirect from list
         - Display the form
           + name 
           + description 
@@ -78,9 +78,12 @@ Phase2 - Client
           + lat  
           + lon
         + Show it prefilled
-        - Edit Button makes form editable
         + Validations on input
-        - Cancel or save button makes form ineditable again
+        + Cancel button sends back to list
+        + After save, cancel button becomes back to list
+      HERE=> Create Apartment
+      + Delete Apartment
+        ? show an alert?
 
   - Admin screen for CRUD -> Users
 
