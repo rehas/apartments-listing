@@ -49,7 +49,7 @@ Phase2 - Client
     - Filtering -> Decide server side or client side. -> Server Side better
       + Make sure only 5 apartents are returned from backend
       + Take filtering options in backend (default by ID reversed)
-      - Put- filtering dropdown menus - buttons - input fields
+      + Put- filtering dropdown menus - buttons - input fields
         + size
           + 0 - 50m2
           + 51 - 100m2
@@ -65,6 +65,23 @@ Phase2 - Client
           + 2-3
           + 3+
   HERE=> Edit / Delete / Create Apartment screen
+      + Set the path
+      - Form Component for edit / delete
+        -redirect from list
+        - Display the form
+          + name 
+          + description 
+          + floor_area_size 
+          + price_per_month 
+          + number_of_rooms 
+          + available 
+          + lat  
+          + lon
+        + Show it prefilled
+        - Edit Button makes form editable
+        + Validations on input
+        - Cancel or save button makes form ineditable again
+
   - Admin screen for CRUD -> Users
 
  - Write down components
