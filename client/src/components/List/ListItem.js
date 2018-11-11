@@ -1,9 +1,7 @@
 import React, {PureComponent} from 'react'
 import { Card, CardContent, Typography, withStyles, Button, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom'
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
+import { Col, Row } from 'react-flexbox-grid';
 import Edit from '@material-ui/icons/Edit';
 
 const styles = theme=>  ({
@@ -37,6 +35,10 @@ const styles = theme=>  ({
     height: 28,
     width: 28,
   },
+  vertical:{
+    writingMode: 'vertical-rl',
+    textOrientation: 'upright'
+  }
 })
 
 class ListItem extends PureComponent{
@@ -65,6 +67,8 @@ class ListItem extends PureComponent{
         {
           item && 
           <Card className={item.available? classes.cardActive : classes.cardPassive}>
+          <Row lg={12}>
+          <Col lg={1}>
           {this.props.canEdit &&
                 <span className={classes.controls}>
                 <IconButton aria-label="Edit" className={classes.editIcon}>
@@ -74,9 +78,16 @@ class ListItem extends PureComponent{
                 </IconButton>
               </span> 
               }
+            </Col>
+            <Col lg={1} className={classes.vertical}>
+              <Typography className={classes.vertical}>
+                {!item.available ? "Sold" : ""}
+              </Typography>
+            </Col>
+            <Col lg={10}>
             <CardContent className={classes.content}>
               <Typography className={classes.title}>
-                Name : {item.name} {!item.available ? " -- Sold Out" : ""}
+                Name : {item.name} 
               </Typography>
               <Typography variant="subtitle1">
                 Size : {item.floorAreaSize} m<sup>2</sup> 
@@ -86,8 +97,9 @@ class ListItem extends PureComponent{
               <Typography>
                 Number Of Rooms : {item.numberOfRooms}
               </Typography>
-              
             </CardContent>
+            </Col>
+          </Row>  
           </Card>
         }
       </div>

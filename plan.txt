@@ -10,12 +10,12 @@ Phase2 - Client
  + SetUp React - App
  + Add redux / redux thunk - superagent - redux-devtools
  - Design Layout
-  - Login / SignUp Page
+  + Login / SignUp Page
     + Check if JWT expired and redirect to login!
     + Form simple layout and simple functionality
     + Form actual signup / login process
     + Form layout fix in grid
-    - Login / Signup success process
+    + Login / Signup success process
       + Redirect to another page
       + Handle enter button submit. 
       + Show the logout button
@@ -28,7 +28,7 @@ Phase2 - Client
   - Apartmens / Maps Layout
     + Create path on the client side
     + Design layout with grid structure
-    - Create components for
+    + Create components for
       + list
         + Create cards for each apartment
         + Make cards snap on to list with grid
@@ -41,11 +41,11 @@ Phase2 - Client
           - Show differnt color if not available
       - Add / Edit Apartments
         - Fix button position on card
-        - Check user type eligibility
-          - If client, send to logout
-          - Else show apartment details
-            - Edit Button makes form data editable
-            - Edit button summons save button
+        + Check user type eligibility
+          + If client, send to logout
+          + Else show apartment details
+            + Edit Button makes form data editable
+            + Edit button summons save button
             - Delete button alerts and then deletes, and then sends the user back to apartments
     - Filtering -> Decide server side or client side. -> Server Side better
       + Make sure only 5 apartents are returned from backend
@@ -82,9 +82,9 @@ Phase2 - Client
         + Validations on input
         + Cancel button sends back to list
         + After save, cancel button becomes back to list
-      - Create Apartment
+      + Create Apartment
        + Create apartment form
-       - put new apartment button on home page
+       + put new apartment button on home page
       + Delete Apartment
         ? show an alert?
 
@@ -107,10 +107,10 @@ Phase2 - Client
     + Fix Logout Button position
   
 
- - Write down components
- - Write down store  / reducers
- - Write down actions
- - KnowHow -> Show Apartments on map
+ + Write down components
+ + Write down store  / reducers
+ + Write down actions
+ + KnowHow -> Show Apartments on map
   + Show map
   + Show pins
   - Make pins clickable / show popover info

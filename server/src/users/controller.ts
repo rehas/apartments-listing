@@ -1,8 +1,7 @@
 import {JsonController, Body, Post, BadRequestError, Authorized, Delete, Param, Patch, CurrentUser, Get, UnauthorizedError} from 'routing-controllers'
 import User from './entity';
 import { sign } from '../jwt';
-import { Not, RelationCount } from 'typeorm';
-import Apartment from '../apartments/entity';
+import { Not } from 'typeorm';
 
 const userTypes = ['client', 'realtor', 'admin']
 
