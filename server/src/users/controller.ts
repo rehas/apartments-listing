@@ -1,6 +1,8 @@
 import {JsonController, Body, Post, BadRequestError, Authorized, Delete, Param, Patch, CurrentUser, Get, UnauthorizedError} from 'routing-controllers'
 import User from './entity';
 import { sign } from '../jwt';
+import { Not, RelationCount } from 'typeorm';
+import Apartment from '../apartments/entity';
 
 const userTypes = ['client', 'realtor', 'admin']
 
@@ -162,6 +164,19 @@ export default class UserController{
 
     return user
 
+  }
+
+  @Authorized(["admin"])
+  @Get('/users')
+  async getAllUsers (
+    @CurrentUser() currentUser : User
+  ){
+    const users = await User.find({
+      where: {id: Not(currentUser.id)},
+      relations:["apartments"]
+    })
+
+    return users
   }
 
 }

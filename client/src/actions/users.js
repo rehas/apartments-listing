@@ -10,10 +10,16 @@ export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS'
 export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED'
 export const GET_CURRENT_USER = 'GET_CURRENT_USER'
 export const GET_EDIT_USER = 'GET_EDIT_USER'
+export const GET_ALL_USERS_SUCCESS = 'GET_ALL_USERS_SUCCESS'
 
 const userLoginSuccess = (login) => ({
   type: USER_LOGIN_SUCCESS,
   payload: login
+})
+
+const getAllUsersSuccess = (data) => ({
+  type: GET_ALL_USERS_SUCCESS,
+  payload : data
 })
 
 const userLoginFailed = () =>({
@@ -157,5 +163,20 @@ export const createUser = (jwt, newUserData) => (dispatch) => {
     .set('Authorization', `Bearer ${jwt}`)
     .send(newUserData)
     .then(response=> console.log(response))
+    .catch(err=> console.log(err))
+}
+
+export const getAllUsers = (jwt) => (dispatch) => {
+  if(isExpired(jwt)){
+    dispatch(logout())
+  }
+
+  request
+    .get(`${baseUrl}/users`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(response=> {
+      console.log(response)
+      dispatch(getAllUsersSuccess(response.body))
+    })
     .catch(err=> console.log(err))
 }
