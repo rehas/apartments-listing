@@ -1,6 +1,6 @@
 import * as request from 'superagent'
 import {baseUrl} from '../constants'
-import {userId } from '../jwt'
+import {userId, isExpired } from '../jwt'
 
 
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
@@ -9,6 +9,7 @@ export const USER_LOGIN_FAILED = 'USER_LOGIN_FAILED'
 export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS'
 export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED'
 export const GET_CURRENT_USER = 'GET_CURRENT_USER'
+export const GET_EDIT_USER = 'GET_EDIT_USER'
 
 const userLoginSuccess = (login) => ({
   type: USER_LOGIN_SUCCESS,
@@ -30,6 +31,11 @@ const userSignUpSuccess = () => ({
 const getCurrentUserSuccess = (userData) => ({
   type: GET_CURRENT_USER,
   payload: userData
+})
+
+const getUserForEditingSuccess = (userData) => ({
+  type: GET_EDIT_USER,
+  payload : userData
 })
 
 export const login = (email, password) => (dispatch) => {
@@ -82,3 +88,61 @@ export const getCurrentUser = (userid, jwt)=> (dispatch) =>{
     .catch(err=> console.log(err))
 }
 
+export const getUserForEditing = (edituserid, jwt)=> (dispatch) =>{
+  if (isExpired(jwt)){
+    dispatch(logout());
+  }
+
+  const adminId = userId(jwt)
+
+  request
+    .get(`${baseUrl}/users/${adminId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(response => 
+      {
+        // console.log(response.body);
+        dispatch(getCurrentUserSuccess(response.body))
+        if(response.body.userType !=='admin'){
+          dispatch(logout())
+        }else{
+          console.log("second step of editing")
+          request
+          .get(`${baseUrl}/users/edit/${edituserid}`)
+          .set('Authorization', `Bearer ${jwt}`)
+          .then(response => 
+            {
+              // console.log(response.body);
+              dispatch(getUserForEditingSuccess(response.body))
+            })
+          .catch(err=> console.log(err))
+        }
+      })
+    .catch(err=> console.log(err))
+}
+
+export const editUser = (edituserid, jwt, editUserData) => (dispatch) => {
+  if (isExpired(jwt)){
+    dispatch(logout())
+  }
+
+  request
+    .patch(`${baseUrl}/users/${edituserid}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send(editUserData)
+    .then(response=>{
+      console.log(response)
+    })
+    .catch(err=>console.log(err))
+}
+
+export const deleteUser = (deleteUserId, jwt) => (dispatch) => {
+  if (isExpired(jwt)){
+    dispatch(logout())
+  }
+
+  request
+    .delete(`${baseUrl}/users/${deleteUserId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(response => console.log(response))
+    .catch(err=> console.log(err))
+}

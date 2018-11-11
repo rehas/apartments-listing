@@ -120,13 +120,19 @@ export default class UserController{
     @Param('userid') userid: number,
     @CurrentUser() currentUser : User
   ){
-
-    if(currentUser.id !==userid){
+    if(  currentUser.id !==userid){
       throw new UnauthorizedError("Token owner and requested userData don't match")
     }
-
     return currentUser
-    
+  }
+
+  @Authorized(["admin"])
+  @Get('/users/edit/:userid([0-9]+)')
+  async getUserForEdit(
+    @Param('userid') userid : number
+  ){
+    console.log(userid)
+    return await User.findOne(userid)
   }
 
 }
