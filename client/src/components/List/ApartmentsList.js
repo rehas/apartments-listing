@@ -71,6 +71,9 @@ class ApartmentsList extends PureComponent{
         skip: this.state.page-1
       }, this.props.currentUser.jwt)
     })
+    this.setState({
+      page:1
+    })
   }
 
   render(){
@@ -82,7 +85,6 @@ class ApartmentsList extends PureComponent{
     const currentUserDetails = this.props.currentUserDetails
     return (
       <div>
-        List
         <Row lg={12}>
           <Col lg={4}><FilterListing filterType={"size"} onSelect={this.handleFilter}/></Col>
           <Col lg={4}><FilterListing filterType={"price"} onSelect={this.handleFilter}/></Col>

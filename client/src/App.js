@@ -58,6 +58,11 @@ class App extends Component {
     this.props.history.push('/newuser')
   }
 
+  handleUserList = (e) =>{
+    e.preventDefault()
+    this.props.history.push('/users')
+  }
+
   shouldNewPartmentButtonShowUp = () => {
     const isAdminOrRealtor = (this.props.currentUserDetails.userType !== 'client' )
     const isOnMainPage = this.props.location.pathname.includes('/apartments')
@@ -90,10 +95,17 @@ class App extends Component {
                     New Apartment
               </Button>
               </Row>
-            }{ currentUser && cud && this.shouldNewUserButtonShowUp() &&
+            }{ currentUser && cud && this.shouldNewUserButtonShowUp() && 
               <Row lg={1}>
               <Button className={classes.button} onClick={this.handleNewUser}>
                   New User
+              </Button>
+              </Row>
+            }{
+              currentUser && cud && this.shouldNewPartmentButtonShowUp() &&
+              <Row lg={1}>
+              <Button className={classes.button} onClick={this.handleUserList}>
+                  User List
               </Button>
               </Row>
             }

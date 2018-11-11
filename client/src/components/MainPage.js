@@ -25,10 +25,9 @@ class MainPage extends PureComponent{
       <Grid fluid className={classes.root} >
         <Row  className={classes.root}  >
           <Col className={classes.list} lg={3}>
-            Listing
             <ApartmentsList/>
           </Col>
-          <Col className={classes.map} lg={9}> Map
+          <Col className={classes.map} lg={9}> 
             <MainMap/>
           </Col>
         </Row>

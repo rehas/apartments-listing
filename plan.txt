@@ -100,10 +100,11 @@ Phase2 - Client
 
   + On delete cascade test
 
-  - Routing buttons
-    - New apartment on main page 
-      -For Admins and Realtor
-    - New User button on Users Page
+  + Routing buttons
+    + New apartment on main page 
+      + For Admins and Realtor
+    + New User button on Users Page
+    + Fix Logout Button position
   
 
  - Write down components
