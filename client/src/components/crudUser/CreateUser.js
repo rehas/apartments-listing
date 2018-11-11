@@ -41,7 +41,7 @@ class CreateUser extends PureComponent{
   }
 
   handleCancel = (e) =>{
-    this.props.history.push('/apartments')
+    this.props.history.push('/users')
   }
 
   handleSubmit = (e) => {
@@ -50,6 +50,7 @@ class CreateUser extends PureComponent{
     this.setState({
       editComplete : !this.state.editComplete
     })
+
   }
 
   render(){

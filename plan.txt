@@ -88,16 +88,23 @@ Phase2 - Client
       + Delete Apartment
         ? show an alert?
 
-  HERE=> Admin screen for CRUD -> Users
+  - Admin screen for CRUD -> Users
     + set the paths
       + edit / delete
       + create
       + userList
     + form copmonent for edit / delete
     + form component for create
-    - Users List for admin with edit buttons
-      - with # of created apartments ?
+    + Users List for admin with edit buttons
+      + with # of created apartments ?
 
+  + On delete cascade test
+
+  - Routing buttons
+    - New apartment on main page 
+      -For Admins and Realtor
+    - New User button on Users Page
+  
 
  - Write down components
  - Write down store  / reducers

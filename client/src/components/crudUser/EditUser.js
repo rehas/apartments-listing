@@ -40,7 +40,7 @@ class EditUser extends PureComponent{
   }
 
   handleCancel = (e) =>{
-    this.props.history.push('/apartments')
+    this.props.history.push('/users')
   }
 
   handleSubmit = (e) => {
@@ -54,6 +54,7 @@ class EditUser extends PureComponent{
   handleDelete = (e) => {
     this.props.deleteUser(this.props.match.params.id, this.props.currentUser.jwt)
     // push to userList
+    this.props.history.push('/users')
   }
 
   render(){
