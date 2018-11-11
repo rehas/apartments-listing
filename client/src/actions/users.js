@@ -146,3 +146,16 @@ export const deleteUser = (deleteUserId, jwt) => (dispatch) => {
     .then(response => console.log(response))
     .catch(err=> console.log(err))
 }
+
+export const createUser = (jwt, newUserData) => (dispatch) => {
+  if(isExpired(jwt)){
+    dispatch(logout())
+  }
+
+  request
+    .post(`${baseUrl}/users`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send(newUserData)
+    .then(response=> console.log(response))
+    .catch(err=> console.log(err))
+}

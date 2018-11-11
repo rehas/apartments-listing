@@ -135,4 +135,33 @@ export default class UserController{
     return await User.findOne(userid)
   }
 
+  @Authorized(["admin"])
+  @Post('/users')
+  async createNewUser (
+    @Body() userData : User
+  ){
+    const {fullName, email, password, userType} = userData
+
+    // Check if userType is valid
+
+    if(!userTypes.includes(userType)){
+      throw new BadRequestError("Invalid User Type")
+    }
+    
+    if(await User.findOne({where: {email}})){
+      throw new BadRequestError("This email address is taken, please login or signup with a different address")
+    }
+
+    console.log(typeof userType)
+
+    const entity = User.create({fullName, email, userType})
+
+    await entity.setPassword(password)
+
+    const user = entity.save()
+
+    return user
+
+  }
+
 }

@@ -11,6 +11,8 @@ import MainPage from './components/MainPage';
 import EditApartment from './components/crudApartment/EditApartment';
 import CreateApartment from './components/crudApartment/CreateApartment';
 import EditUser from './components/crudUser/EditUser';
+import CreateUser from './components/crudUser/CreateUser';
+import UsersList from './components/crudUser/UsersList';
 
 const styles = theme =>({
   button:{
@@ -53,8 +55,9 @@ class App extends Component {
           <Route exact path='/' component={LoginSignUp}/>
           <Route exact path='/apartments' component={MainPage}/>
           <Route exact path='/newapartment' component={CreateApartment}/>
-          {/* <Route exact path='/newuser' component={CreateUser}/> */}
+          <Route exact path='/newuser' component={CreateUser}/>
           <Route exact path='/users/:id' component={EditUser}/>
+          <Route exact path='/users' component={UsersList}/>
           <Route exact path='/apartments/:id' component={EditApartment}/>
         </main>
         
