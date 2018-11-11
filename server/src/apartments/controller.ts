@@ -9,7 +9,7 @@ export default class ApartmentsController{
   @Post('/apartments')
   async createApartment(
     @CurrentUser() user : User,
-    @Body() data : Apartment
+    @Body() data : Partial<Apartment>
   ){
     console.log("Current User is:")
     console.log(user)

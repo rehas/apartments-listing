@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
 import {getCurrentUser, logout} from '../../actions/users'
-import {getApartmentId, editApartment, deleteApartment} from '../../actions/apartments'
+import {getApartmentId, editApartment, deleteApartment, createApartment} from '../../actions/apartments'
 import LoginSignUpFormStyles from '../../styles/LoginSignUpFormStyles';
 import EditIcon from '@material-ui/icons/Edit';
 import { CssBaseline, Paper, Avatar, Typography, FormControl, InputLabel, Input, withStyles, NativeSelect, Button } from '@material-ui/core';
@@ -13,7 +13,9 @@ const styles = LoginSignUpFormStyles
 class CreateApartment extends PureComponent{
 
   state = {
-    data : {}
+    data : {
+      available:true
+    }
   }
 
   constructor (props) {
@@ -39,7 +41,8 @@ class CreateApartment extends PureComponent{
 
   handleSubmit = (e) =>{
     e.preventDefault();
-    this.props.createApartment(this.props.match.params.id, this.props.currentUser.jwt, this.state.data)
+    this.props.createApartment(this.props.currentUser.jwt, this.state.data)
+    this.props.history.push('/apartments')
   }
 
   handleCancel = (e) =>{
@@ -171,7 +174,7 @@ class CreateApartment extends PureComponent{
                 </FormControl>
                 <FormControl margin="normal" required fullWidth>
                   <NativeSelect
-                  defaultValue={ad ?ad.available : ""}
+                  defaultValue={ad ?ad.available : true}
                   input={<Input name="available" id="available" />}
                   onChange={this.handleChange}
                 >
@@ -218,7 +221,7 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps = {
-  getCurrentUser, logout, getApartmentId, editApartment, deleteApartment
+  getCurrentUser, logout, getApartmentId, editApartment, deleteApartment, createApartment
 }
 
 

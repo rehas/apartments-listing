@@ -108,3 +108,19 @@ export const deleteApartment = (apartmentId, jwt) => (dispatch) =>{
     .catch(err=> console.log(err))
 }
 
+export const createApartment = (jwt, apartmentData) => (dispatch, getState) => {
+  if (isExpired(jwt)){
+    dispatch(logout());
+  }
+
+  request
+    .post(`${baseUrl}/apartments`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send(apartmentData)
+    .then(response=>{
+      console.log(response)
+      dispatch(getApartmentsList({}, jwt));
+    })
+    .catch(err=> console.log(err))
+}
+
