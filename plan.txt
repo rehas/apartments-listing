@@ -34,6 +34,7 @@ Phase2 - Client
         + Make cards snap on to list with grid
         + make pagination => pagination on server side
       + Map
+        - Make map start focus on the average of pins
         + Learn to show a map on react
         + Show the map
         + show the markers
@@ -81,11 +82,13 @@ Phase2 - Client
         + Validations on input
         + Cancel button sends back to list
         + After save, cancel button becomes back to list
-      HERE=> Create Apartment
+      - Create Apartment
+       + Create apartment form
+       - put new apartment button on home page
       + Delete Apartment
         ? show an alert?
 
-  - Admin screen for CRUD -> Users
+  HERE=> Admin screen for CRUD -> Users
 
  - Write down components
  - Write down store  / reducers
