@@ -67,9 +67,9 @@ Phase2 - Client
           + 3+
   - Edit / Delete / Create Apartment screen
       + Set the path
-      - Form Component for edit / delete
+      + Form Component for edit / delete
         + redirect from list
-        - Display the form
+        + Display the form
           + name 
           + description 
           + floor_area_size 
@@ -89,6 +89,15 @@ Phase2 - Client
         ? show an alert?
 
   HERE=> Admin screen for CRUD -> Users
+    + set the paths
+      + edit / delete
+      + create
+      + userList
+    + form copmonent for edit / delete
+    + form component for create
+    - Users List for admin with edit buttons
+      - with # of created apartments ?
+
 
  - Write down components
  - Write down store  / reducers
