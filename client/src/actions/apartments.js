@@ -5,6 +5,7 @@ import { logout } from './users';
 
 export const GET_APARTMENTS_LIST = 'GET_APARTMENTS_LIST'
 export const GET_APARTMENT_ID = 'GET_APARTMENT_ID'
+export const CANCEL_EDIT_APARTMENT = 'CANCEL_EDIT_APARTMENT'
 
 const getApartmentsListSuccess = (apartmentsList) =>({
   type: GET_APARTMENTS_LIST,
@@ -115,5 +116,11 @@ export const createApartment = (jwt, apartmentData) => (dispatch, getState) => {
       dispatch(getApartmentsList({}, jwt));
     })
     .catch(err=> console.log(err))
+}
+
+export const cancelEditApartment = () => (dispatch) => {
+  dispatch({
+    type: CANCEL_EDIT_APARTMENT
+  })
 }
 

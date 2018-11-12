@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
 import {getCurrentUser, logout} from '../../actions/users'
-import {getApartmentId, editApartment, deleteApartment} from '../../actions/apartments'
+import {getApartmentId, editApartment, deleteApartment, cancelEditApartment} from '../../actions/apartments'
 import LoginSignUpFormStyles from '../../styles/LoginSignUpFormStyles';
 import { CssBaseline, Paper, Typography, FormControl, InputLabel, Input, withStyles, NativeSelect, Button } from '@material-ui/core';
 import { Row, Col } from 'react-flexbox-grid/lib';
@@ -49,6 +49,7 @@ class EditApartment extends PureComponent{
 
   handleCancel = (e) =>{
     this.props.history.push('/apartments')
+    this.props.cancelEditApartment()
   }
 
   handleDelete = (e) =>{
@@ -237,7 +238,7 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps = {
-  getCurrentUser, logout, getApartmentId, editApartment, deleteApartment
+  getCurrentUser, logout, getApartmentId, editApartment, deleteApartment, cancelEditApartment
 }
 
 
