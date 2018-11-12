@@ -43,11 +43,22 @@ class Header extends PureComponent{
     this.props.history.push('/users')
   }
 
+  handleBack = (e) =>{
+    e.preventDefault()
+    this.props.history.goBack()
+  }
+
   shouldNewPartmentButtonShowUp = () => {
     const isAdminOrRealtor = (this.props.currentUserDetails.userType !== 'client' )
     const isOnMainPage = this.props.location.pathname.includes('/apartments')
 
     return isAdminOrRealtor && isOnMainPage
+  }
+  shouldUserListButtonShowUp = () => {
+    const isAdmin = this.props.currentUserDetails.userType === 'admin'
+    const isOnMainPage = this.props.location.pathname.includes('/apartments')
+
+    return isAdmin && isOnMainPage
   }
 
   shouldNewUserButtonShowUp = () =>{
@@ -56,6 +67,13 @@ class Header extends PureComponent{
 
     return isAdmin && isOnUsersPage
   }
+
+  shouldBackButtonShowUp = () => {
+    const isNotOnMainPage = this.props.location.pathname.includes("new") || this.props.location.pathname.includes("user")
+
+    return isNotOnMainPage
+  }
+
   render(){
     const {classes, currentUser : cu, currentUserDetails: cud} = this.props
 
@@ -79,20 +97,23 @@ class Header extends PureComponent{
               </Button>
               </Row>
             }{
-              cu && cud && this.shouldNewPartmentButtonShowUp() &&
+              cu && cud && this.shouldUserListButtonShowUp() &&
               <Row lg={1}>
               <Button className={classes.button} onClick={this.handleUserList}>
                   User List
               </Button>
               </Row>
+            }{
+              cu && cud && this.shouldBackButtonShowUp()&&
+              <Button className={classes.button} onClick={this.handleBack}>
+                  Back
+              </Button>
             }
             </Col>
             <Col  lg={9}>
-              {/* <h1 className="App-title"> */}
                 <Typography variant='headline' className={classes.header}>
                   Apartments Listing App
                 </Typography>
-              {/* </h1> */}
             </Col>
               {
                 cu &&

@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core/';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import {getCurrentUser, getAllUsers} from '../../actions/users'
+import {getCurrentUser, getAllUsers, logout} from '../../actions/users'
 import EditIcon from '@material-ui/icons/Edit';
 
 
@@ -109,7 +109,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = {
   getAllUsers,
-  getCurrentUser
+  getCurrentUser,
+  logout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(UsersList))
