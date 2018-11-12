@@ -3,13 +3,13 @@ const ListItemStyles = theme=>  ({
     minWidth: '100%',
     backgroundColor : theme.palette.primary.light,
     marginBottom: '10px',
-    height: '110px',
+    height: '100px',
   },
   cardPassive: {
     minWidth: '100%',
     backgroundColor : theme.palette.secondary.light,
     marginBottom: '10px',
-    height: '90px',
+    height: '100px',
   },
   title: {
     fontSize: 18,
