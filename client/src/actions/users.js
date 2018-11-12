@@ -111,7 +111,6 @@ export const getUserForEditing = (edituserid, jwt)=> (dispatch) =>{
         if(response.body.userType !=='admin'){
           dispatch(logout())
         }else{
-          console.log("second step of editing")
           request
           .get(`${baseUrl}/users/edit/${edituserid}`)
           .set('Authorization', `Bearer ${jwt}`)
@@ -136,7 +135,7 @@ export const editUser = (edituserid, jwt, editUserData) => (dispatch) => {
     .set('Authorization', `Bearer ${jwt}`)
     .send(editUserData)
     .then(response=>{
-      console.log(response)
+      console.log(response.status)
     })
     .catch(err=>console.log(err))
 }
@@ -175,7 +174,6 @@ export const getAllUsers = (jwt) => (dispatch) => {
     .get(`${baseUrl}/users`)
     .set('Authorization', `Bearer ${jwt}`)
     .then(response=> {
-      console.log(response)
       dispatch(getAllUsersSuccess(response.body))
     })
     .catch(err=> console.log(err))

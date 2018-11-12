@@ -166,6 +166,7 @@ export default class UserController{
   ){
     const users = await User.find({
       where: {id: Not(currentUser.id)},
+      order: {id: "DESC"},
       relations:["apartments"]
     })
 

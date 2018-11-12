@@ -49,15 +49,11 @@ export const getApartmentsList = (filterData, jwt) => (dispatch) =>{
     norMax
   }
 
-  // console.log(query)
-  // console.log(filterData)
-
   request
     .get(`${baseUrl}/apartments`)
     .set('Authorization', `Bearer ${jwt}`)
     .query(query)
     .then(response => {
-      // console.log(response.body)
       dispatch(getApartmentsListSuccess(response.body))
     })
     .catch(err => console.log(err))
@@ -72,7 +68,6 @@ export const getApartmentId = (apartmentId, jwt) => (dispatch) =>{
     .get(`${baseUrl}/apartments/${apartmentId}`)
     .set('Authorization', `Bearer ${jwt}`)
     .then(response => {
-      // console.log(response.body)
       dispatch(getApartmentIdSuccess(response.body));
     })
     .catch(err => console.log(err))
@@ -89,7 +84,6 @@ export const editApartment = (apartmentId, jwt, apartmentData) => (dispatch) =>{
     .set('Authorization', `Bearer ${jwt}`)
     .send(apartmentData)
     .then(response=>{
-      console.log(response)
       dispatch(getApartmentsList({}, jwt));
       dispatch(getApartmentId(apartmentId, jwt))
     })
@@ -104,7 +98,7 @@ export const deleteApartment = (apartmentId, jwt) => (dispatch) =>{
   request
     .delete(`${baseUrl}/apartments/${apartmentId}`)
     .set('Authorization', `Bearer ${jwt}`)
-    .then(response => console.log(response))
+    .then(response => console.log(response.status))
     .catch(err=> console.log(err))
 }
 
@@ -118,7 +112,6 @@ export const createApartment = (jwt, apartmentData) => (dispatch, getState) => {
     .set('Authorization', `Bearer ${jwt}`)
     .send(apartmentData)
     .then(response=>{
-      console.log(response)
       dispatch(getApartmentsList({}, jwt));
     })
     .catch(err=> console.log(err))
