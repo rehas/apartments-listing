@@ -115,15 +115,15 @@ class Header extends PureComponent{
               </Button>
             }
             </Col>
-            <Col  lg={9}>
+            <Col  lg={10}>
                 <Typography variant='headline' className={classes.header}>
                   Apartments Listing App
                 </Typography>
             </Col>
               {
                 cu &&
-                <Col  lg={2}>
-                  <Row lg={2}>
+                <Col  lg={1}>
+                  <Row lg={1}>
                   <Button
                     className={classes.button}
                     type="submit"
@@ -131,10 +131,10 @@ class Header extends PureComponent{
                     >Logout <LockTwoTone/>
                     </Button>
                   </Row>  
-                  <Row lg={2}>
+                  <Row lg={1}>
                     {cud &&
-                    <Typography className={classes.headerText}> 
-                      {cud.fullName}
+                    <Typography className={classes.headerText} variant='button'> 
+                      {cud.fullName.slice(0,8)}
                     </Typography>
                     }
                   </Row>

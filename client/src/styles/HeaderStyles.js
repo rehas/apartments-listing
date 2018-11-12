@@ -2,7 +2,7 @@ const HeaderStyles = theme =>({
   root: {
     backgroundColor: theme.palette.primary.dark,
     height: '100px',
-    padding: '20px',
+    padding: '0 10px 20px 10px',
     color: 'white'
   },
   button:{
@@ -15,6 +15,10 @@ const HeaderStyles = theme =>({
   },
   headerText:{
     color: theme.palette.primary.contrastText,
+    margin: theme.spacing.unit,
+    padding: theme.spacing.unit* 2,
+    fontSize: '0.8em',
+    backgroundColor: theme.palette.secondary.dark,
   }
 })
 
