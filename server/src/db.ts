@@ -44,4 +44,42 @@ export default () =>
       migrationsDir: "migration"
     }
   })
+    .then(async connection=> {
+      if(!await User.findOne({where: {email: "john@doe.com"}})){
+
+        let user = new User();
+        user.fullName = "Jon Doe";
+        user.email = "john@doe.com";
+        await user.setPassword('password');
+        user.userType = 'admin'
+    
+        const userRepo = connection.getRepository(User)
+    
+        await userRepo.save(user);
+
+        console.log("Added first admin user - john@doe.com - password")
+      }
+
+    if(! await Apartment.findOne({where: {description:"First Apartment from migrations"}})){
+      let A = new Apartment();
+      A.name = "First Entry";
+      A.description = "First Apartment from migrations";
+      A.available = true;
+      A.lat = 52.35;
+      A.lon = 4.90;
+      A.numberOfRooms = 3;
+      A.pricePerMonth = 1100;
+      A.floorAreaSize = 110;
+      const johnuser = await User.findOne({where: {email: "john@doe.com"}})
+      if(johnuser){
+        A.user = johnuser
+      }
+  
+      let apartmentRepository = connection.getRepository(Apartment);
+  
+      await apartmentRepository.save(A);
+      console.log("Added first apartment in Amsterdam")
+
+    }
+  })
     .then(_ => console.log('Connected to Postgres with TypeORM'))
