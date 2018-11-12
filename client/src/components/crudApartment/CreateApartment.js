@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 import {getCurrentUser, logout} from '../../actions/users'
 import {getApartmentId, editApartment, deleteApartment, createApartment} from '../../actions/apartments'
 import LoginSignUpFormStyles from '../../styles/LoginSignUpFormStyles';
-import EditIcon from '@material-ui/icons/Edit';
-import { CssBaseline, Paper, Avatar, Typography, FormControl, InputLabel, Input, withStyles, NativeSelect, Button } from '@material-ui/core';
+import { CssBaseline, Paper, Typography, FormControl, InputLabel, Input, withStyles, NativeSelect, Button } from '@material-ui/core';
 import { Row, Col } from 'react-flexbox-grid/lib';
 
 const styles = LoginSignUpFormStyles
@@ -56,13 +55,11 @@ class CreateApartment extends PureComponent{
 
     const ad = this.state.data
 
-    if (cud && cud.userType === 'client' ){
+    if (cu && cud && cud.userType === 'client' ){
       this.props.logout()
       this.props.history.push('/')
     }
     const {classes} = this.props
-
-    console.log(this.props)
 
     return (
         <React.Fragment>
@@ -70,9 +67,6 @@ class CreateApartment extends PureComponent{
         {
           <main className={classes.layout}>
             <Paper className={classes.paper}>
-              {/* <Avatar className={classes.avatar}>
-                <EditIcon />
-              </Avatar> */}
               <Typography component="h1" variant="h5">
                 Create Apartment 
               </Typography>

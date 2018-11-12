@@ -61,11 +61,7 @@ class ApartmentsList extends PureComponent{
   }
 
   handleFilter = (selection) =>{
-    console.log({
-      ...selection
-    })
     this.setState({...selection} , ()=>{
-      console.log(this.state)
       this.props.getApartmentsList({
         ...this.state,
         skip: this.state.page-1

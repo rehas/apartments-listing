@@ -9,7 +9,6 @@ import LoginSignUpFormStyles from '../styles/LoginSignUpFormStyles';
 const styles = LoginSignUpFormStyles
 
 class SignUpForm extends PureComponent{
-
   
   state={
     userType:"client",

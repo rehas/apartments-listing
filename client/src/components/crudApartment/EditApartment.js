@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 import {getCurrentUser, logout} from '../../actions/users'
 import {getApartmentId, editApartment, deleteApartment} from '../../actions/apartments'
 import LoginSignUpFormStyles from '../../styles/LoginSignUpFormStyles';
-import EditIcon from '@material-ui/icons/Edit';
-import { CssBaseline, Paper, Avatar, Typography, FormControl, InputLabel, Input, withStyles, NativeSelect, Button } from '@material-ui/core';
+import { CssBaseline, Paper, Typography, FormControl, InputLabel, Input, withStyles, NativeSelect, Button } from '@material-ui/core';
 import { Row, Col } from 'react-flexbox-grid/lib';
 
 const styles = LoginSignUpFormStyles
@@ -61,13 +60,11 @@ class EditApartment extends PureComponent{
 
     const { currentUser: cu, currentUserDetails : cud, apartmentDetails : ad} = this.props
 
-    if (cud && cud.userType === 'client' ){
+    if (cu && cud && cud.userType === 'client' ){
       this.props.logout()
       this.props.history.push('/')
     }
     const {classes} = this.props
-
-    console.log(this.props)
 
     if(!ad){
     this.props.getApartmentId(this.props.match.params.id, this.props.currentUser.jwt)
@@ -82,9 +79,6 @@ class EditApartment extends PureComponent{
         {ad &&
           <main className={classes.layout}>
             <Paper className={classes.paper}>
-              {/* <Avatar className={classes.avatar}>
-                <EditIcon />
-              </Avatar> */}
               <Typography component="h1" variant="h5">
                 Edit or Delete Apartment : <br/> {ad.name}
               </Typography>

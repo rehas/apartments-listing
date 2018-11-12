@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {getCurrentUser, logout, getUserForEditing, editUser, deleteUser} from '../../actions/users'
-import {Input, Button, NativeSelect, CssBaseline, withStyles, Paper, Avatar, Typography, FormControl} from '@material-ui/core/';
+import {Input, Button, NativeSelect, CssBaseline, withStyles, Paper, Typography, FormControl} from '@material-ui/core/';
 import InputLabel from '@material-ui/core/InputLabel';
 import { Row, Col } from 'react-flexbox-grid/lib';
 import LoginSignUpFormStyles from '../../styles/LoginSignUpFormStyles';
@@ -53,20 +53,17 @@ class EditUser extends PureComponent{
 
   handleDelete = (e) => {
     this.props.deleteUser(this.props.match.params.id, this.props.currentUser.jwt)
-    // push to userList
     this.props.history.push('/users')
   }
 
   render(){
     const { currentUser: cu, currentUserDetails : cud, editUserInfo : eu} = this.props
 
-    if (cud && cud.userType !== 'admin' ){
+    if (cu&& cud && cud.userType !== 'admin' ){
       this.props.logout()
       this.props.history.push('/')
     }
     const {classes} = this.props
-
-    console.log(eu)
 
     return (
       <React.Fragment>
@@ -77,9 +74,6 @@ class EditUser extends PureComponent{
       {eu &&
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-            {/* <Avatar className={classes.avatar}>
-              <EditIcon />
-            </Avatar> */}
             <Typography component="h1" variant="h5">
               Edit or Delete User : <br/> {eu.fullName}
             </Typography>
@@ -122,7 +116,6 @@ class EditUser extends PureComponent{
                   margin="dense"
                 />
               </FormControl>
-              
               <FormControl margin="normal" required fullWidth>
                   <NativeSelect
                   defaultValue={eu ? eu.userType : 'client'}

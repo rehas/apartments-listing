@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {getCurrentUser, logout, getUserForEditing, editUser, deleteUser, createUser} from '../../actions/users'
-import {Input, Button, NativeSelect, CssBaseline, withStyles, Paper, Avatar, Typography, FormControl} from '@material-ui/core/';
+import {Input, Button, NativeSelect, CssBaseline, withStyles, Paper, Typography, FormControl} from '@material-ui/core/';
 import InputLabel from '@material-ui/core/InputLabel';
 import { Row, Col } from 'react-flexbox-grid/lib';
 import LoginSignUpFormStyles from '../../styles/LoginSignUpFormStyles';
@@ -24,11 +24,6 @@ class CreateUser extends PureComponent{
     }else if (!this.props.currentUserDetails) {
       this.props.getCurrentUser(this.props.currentUser.id, this.props.currentUser.jwt)
     }
-  }
-
-  componentDidMount = () => {
-    // this.props.currentUser && 
-    // this.props.getUserForEditing(this.props.match.params.id, this.props.currentUser.jwt)
   }
 
   handleChange = (e) => {
@@ -58,7 +53,7 @@ class CreateUser extends PureComponent{
     
     const ud = this.state.data
 
-    if (cud && cud.userType !== 'admin' ){
+    if (cu && cud && cud.userType !== 'admin' ){
       this.props.logout()
       this.props.history.push('/')
     }
@@ -70,9 +65,6 @@ class CreateUser extends PureComponent{
       {cud &&
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-            {/* <Avatar className={classes.avatar}>
-              <EditIcon />
-            </Avatar> */}
             <Typography component="h1" variant="h5">
               Create User 
             </Typography>
@@ -116,7 +108,6 @@ class CreateUser extends PureComponent{
                   required={true}
                 />
               </FormControl>
-              
               <FormControl margin="normal" required fullWidth>
                   <NativeSelect
                   defaultValue={ud ? ud.userType : 'client'}

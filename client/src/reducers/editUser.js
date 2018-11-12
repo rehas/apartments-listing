@@ -1,8 +1,6 @@
 import { USER_LOGOUT, USER_LOGIN_FAILED, GET_EDIT_USER, GET_ALL_USERS_SUCCESS} from '../actions/users'
-import {localStorageJwtKey} from '../constants'
 
 let initialState = null
-
 
 export default function (state = initialState, {type, payload}) {
 	switch (type) {

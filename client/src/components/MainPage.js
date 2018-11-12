@@ -5,13 +5,15 @@ import { Col } from 'react-flexbox-grid';
 import { withStyles } from '@material-ui/core';
 import ApartmentsList from './List/ApartmentsList';
 import MainMap from './Map/MainMap';
+import grey from '@material-ui/core/colors/grey';
+
 
 const styles = theme =>({
   map:{
-    backgroundColor: 'blue',
+    backgroundColor: grey[300],
   },
   list:{
-    backgroundColor: 'yellow',
+    backgroundColor: grey[300],
   },
   root: {
     height : '100%',

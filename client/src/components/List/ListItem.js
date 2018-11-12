@@ -1,49 +1,14 @@
 import React, {PureComponent} from 'react'
-import { Card, CardContent, Typography, withStyles, Button, IconButton } from '@material-ui/core';
+import { Card, CardContent, Typography, withStyles, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { Col, Row } from 'react-flexbox-grid';
 import Edit from '@material-ui/icons/Edit';
+import ListItemStyles from '../../styles/ListItemStyles'
 
-const styles = theme=>  ({
-  cardActive: {
-    minWidth: '100%',
-    backgroundColor : theme.palette.primary.light,
-    marginBottom: '10px',
-    height: '110px',
-  },
-  cardPassive: {
-    minWidth: '100%',
-    backgroundColor : theme.palette.secondary.light,
-    marginBottom: '10px',
-    height: '90px',
-  },
-  title: {
-    fontSize: 18,
-    color: theme.palette.primary.dark,
-    margin: '1px'
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0px',
-  },
-  content: {
-    paddingTop: '0px',
-    paddingBottom: '0px'
-  },
-  editIcon: {
-    height: 28,
-    width: 28,
-  },
-  vertical:{
-    writingMode: 'vertical-rl',
-    textOrientation: 'upright'
-  }
-})
+const styles = ListItemStyles
 
 class ListItem extends PureComponent{
   render(){
-    // console.log(this.props)
     const item = this.props.data
     const {classes} = this.props
     const {noApartments} = this.props

@@ -130,7 +130,7 @@ class App extends Component {
                   </Row>  
                   <Row lg={2}>
                     {this.props.currentUserDetails &&
-                    <Typography className={classes.headerText} alignCenter> 
+                    <Typography className={classes.headerText}> 
                       {this.props.currentUserDetails.fullName}
                     </Typography>
                     }

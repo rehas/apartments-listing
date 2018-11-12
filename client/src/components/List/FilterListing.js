@@ -24,7 +24,6 @@ class FilterListing extends PureComponent{
           return ["Filter Not Working"];
       }
     }
-    // console.log(this.props)
     const {filterType} = this.props
     return (
       <FormControl margin="normal" required fullWidth>
