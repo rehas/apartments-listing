@@ -34,20 +34,20 @@ Phase2 - Client
         + Make cards snap on to list with grid
         + make pagination => pagination on server side
       + Map
-        - Make map start focus on the average of pins
+        TODO=> Make map start focus on the average of pins
         + Learn to show a map on react
         + Show the map
         + show the markers
-          - Show differnt color if not available
+          TODO=> Show differnt color if not available
       - Add / Edit Apartments
-        - Fix button position on card
+        + Fix button position on card
         + Check user type eligibility
           + If client, send to logout
           + Else show apartment details
             + Edit Button makes form data editable
             + Edit button summons save button
-            - Delete button alerts and then deletes, and then sends the user back to apartments
-    - Filtering -> Decide server side or client side. -> Server Side better
+            TODO=> Delete button alerts and then deletes, and then sends the user back to apartments
+    + Filtering -> Decide server side or client side. -> Server Side better
       + Make sure only 5 apartents are returned from backend
       + Take filtering options in backend (default by ID reversed)
       + Put- filtering dropdown menus - buttons - input fields
@@ -86,9 +86,9 @@ Phase2 - Client
        + Create apartment form
        + put new apartment button on home page
       + Delete Apartment
-        ? show an alert?
+        TODO=> show an alert?
 
-  - Admin screen for CRUD -> Users
+  + Admin screen for CRUD -> Users
     + set the paths
       + edit / delete
       + create
@@ -113,10 +113,21 @@ Phase2 - Client
  + KnowHow -> Show Apartments on map
   + Show map
   + Show pins
-  - Make pins clickable / show popover info
+  TODO=> Make pins clickable / show popover info
 -------------
 EXTRAS:
   - Sorting 
+  - deploy
+  TODO=> tests
+  + Code refactor
+    + server
+    + client
+      + Extract styles into own files
+  + Put back navigation buttons for :
+    + UsersList
+  - Fix heights
+  - Find better markers
+  + migrations
 -------------
 Backend
  Entities
@@ -130,14 +141,14 @@ Backend
       - TODO: Make sure DB doesn't accept anything else. => Create interface or customType
     + password : string
 
-    - Authentication decorator
+    + Authentication decorator
       + Simple implementation setup. 
       + Check if logged in
-    - Authorization decorator
+    + Authorization decorator
       + Simple implementation setup. 
       + Check if authorized to access resource
 
-  - Apartment Entity
+  + Apartment Entity
     + id: unique
     + name : String
     + description
@@ -150,20 +161,20 @@ Backend
     + date added
     + associated realtor (ManyToOne)
     + Available?
- - Implement Entities
-  - Cascade delete options for deletion of a realtor -> Does the apartments of the realtor go away? -> Yes
+ + Implement Entities
+  + Cascade delete options for deletion of a realtor -> Does the apartments of the realtor go away? -> Yes
  
  Controllers
- - Login / Logout / SignUp Controllers
+ + Login / Logout / SignUp Controllers
   + Password check / use bcyrpt
   + Return JWT Token for authentication
   + Check if all data provided are valid
-  - Login / SignUp / Logout
+  + Login / SignUp / Logout
     + SignUp
     + Login
       + Simple Login
       + Login with token
-  - Logout
+  + Logout
   + Delete User
     + Only Admin
   + Edit User
@@ -182,9 +193,7 @@ Backend
     + Check credentials / check authorization
   + Edit Apartment
     + Check credentials / check authorization
- - GeoLocation 
-  - Should this be a sepeare endPoint ? Or during the creation of the entity?
-  - If seperate implement and test. 
+ 
  + Implement Entity Rest Api Controllers
  - Test
 
@@ -195,10 +204,10 @@ Rubrick
 The requirements for the test project are:
 Write an application that manages apartment rentals
 
-- Users must be able to create an account and log in. (If a mobile application, this means that multiple users can use the app from the same phone).
-- Implement a client role:
++ Users must be able to create an account and log in. (If a mobile application, this means that multiple users can use the app from the same phone).
++ Implement a client role:
    * Clients are able to browse rentable apartments in a list and on a map.
-- Implement a realtor role:
++ Implement a realtor role:
    * Realtors would be able to browse all rentable- and already rented apartments in a list and on a map.
    * Realtors would be able to CRUD all apartments and set the apartment state to available/rented.
 - Implement an admin role:
