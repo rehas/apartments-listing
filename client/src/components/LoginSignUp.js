@@ -44,7 +44,7 @@ class LoginSignUp extends PureComponent  {
   render(){
     const {classes} = this.props
     if(this.props.currentUser !== null){
-      this.props.history.push('/apartments')
+      // this.props.history.push('/apartments')
       return (<div></div>)
     }else{
       return (

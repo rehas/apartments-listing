@@ -22,6 +22,13 @@ class Header extends PureComponent{
     }
   }
 
+  componentDidMount = () =>{
+    if(!this.props.currentUser || isExpired(this.props.currentUser.jwt)){
+      this.props.logout()
+      return <div></div>
+    }
+  }
+
   handleLogout = (e) => {
     e.preventDefault()
     this.props.logout();
@@ -77,9 +84,7 @@ class Header extends PureComponent{
   render(){
     const {classes, currentUser : cu, currentUserDetails: cud} = this.props
 
-    if(!cu || isExpired(cu.jwt)){
-      this.props.logout()
-    }
+    
     return (
       <header className={classes.root}>
           <Row lg={12}>

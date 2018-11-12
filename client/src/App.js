@@ -26,9 +26,9 @@ class App extends Component {
   render() {
     const {currentUser} = this.props
 
-    if(!currentUser || isExpired(currentUser.jwt)){
-      this.props.logout()
-    }
+    // if(!currentUser || isExpired(currentUser.jwt)){
+    //   this.props.logout()
+    // }
     
     return (
       <div className="App">

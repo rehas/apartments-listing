@@ -12,9 +12,18 @@ const ListItemStyles = theme=>  ({
     height: '100px',
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     color: theme.palette.primary.dark,
-    margin: '1px'
+    margin: '1px',
+    textOverflow : '',
+    whiteSpace: 'nowrap'
+  },
+  description: {
+    fontSize: 14,
+    color: theme.palette.primary.dark,
+    margin: '1px',
+    textOverflow : '',
+    whiteSpace: 'nowrap'
   },
   controls: {
     display: 'flex',
@@ -31,7 +40,9 @@ const ListItemStyles = theme=>  ({
   },
   vertical:{
     writingMode: 'vertical-rl',
-    textOrientation: 'upright'
+    textOrientation: 'upright',
+    fontSize : 13,
+    verticalAlign: 'top',
   }
 });
 

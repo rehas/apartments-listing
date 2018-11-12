@@ -33,26 +33,29 @@ class ListItem extends PureComponent{
           item && 
           <Card className={item.available? classes.cardActive : classes.cardPassive}>
           <Row lg={12}>
-          <Col lg={1}>
+            <Col lg={2}>
           {this.props.canEdit &&
                 <span className={classes.controls}>
                 <IconButton aria-label="Edit" className={classes.editIcon}>
                   <Link to={`/apartments/${item.id}`}>
-                  <Edit  />
+                  <Edit  /> {item.id}
                   </Link>
                 </IconButton>
               </span> 
               }
-            </Col>
+          </Col>
             <Col lg={1} className={classes.vertical}>
-              <Typography className={classes.vertical}>
-                {!item.available ? "Sold" : ""}
-              </Typography>
-            </Col>
-            <Col lg={10}>
+            <Typography className={classes.vertical} variant='inherit'>
+              {!item.available ? "Sold" : "-"}
+            </Typography>
+          </Col>
+            <Col lg={8}>
             <CardContent className={classes.content}>
               <Typography className={classes.title}>
-                Name : {item.name} 
+                {item.name} 
+              </Typography>
+              <Typography className={classes.description}>
+                {item.description} 
               </Typography>
               <Typography variant="subtitle1">
                 Size : {item.floorAreaSize} m<sup>2</sup> 
