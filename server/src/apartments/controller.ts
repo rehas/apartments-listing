@@ -11,14 +11,9 @@ export default class ApartmentsController{
     @CurrentUser() user : User,
     @Body() data : Partial<Apartment>
   ){
-    console.log("Current User is:")
-    console.log(user)
-
     if(!user){
       return new UnauthorizedError("Please login")
     }
-
-    console.log(data)
 
     const newApartment = Apartment.create(data);
     newApartment.user = user;
@@ -34,29 +29,31 @@ export default class ApartmentsController{
     @CurrentUser() user: User,
     @QueryParams() params
   ){
-    // console.log(params)
-    // console.log(user)
-
+ 
     if(!user){
       return new UnauthorizedError("Please login")
     }
 
-    console.log("params:\n")
-    console.log(params)
+    let {
+      sizeMax, sizeMin, priceMax, priceMin, 
+      norMax, norMin, available, id, 
+      skip, name, dateAdded,
+      ...rest
+    } = params
 
-    let {sizeMax, sizeMin, priceMax, priceMin, norMax, norMin, available, id, skip, name, dateAdded,  ...rest} = params
+    // console.log({
+    //   sizeMax: isNaN(sizeMax), 
+    //   sizeMin: isNaN(sizeMin), 
+    //   priceMax : isNaN(priceMax),
+    //   priceMin : isNaN(priceMin),
+    //   norMax: isNaN(norMax),
+    //   norMin: isNaN(norMin),
+    //   available: isNaN(available),
+    //   rest: isNaN(rest)
+    // }
+    // )
 
-    console.log({
-      sizeMax: isNaN(sizeMax), 
-      sizeMin: isNaN(sizeMin), 
-      priceMax : isNaN(priceMax),
-      priceMin : isNaN(priceMin),
-      norMax: isNaN(norMax),
-      norMin: isNaN(norMin),
-      available: isNaN(available),
-      rest: isNaN(rest)
-    }
-    )
+    console.log(rest)
 
     // Show only available ones to clients 
     if(user.userType === 'client'){
@@ -73,8 +70,6 @@ export default class ApartmentsController{
     norMin    = (norMin && !isNaN(norMin))  ? norMin   : 0
     available = available === 'true' ? true : available === 'false' ? false : null;
 
-    
-
     const searchQuery = {
       floorAreaSize : Between(sizeMin, sizeMax),
       pricePerMonth : Between(priceMin, priceMax),
@@ -82,11 +77,7 @@ export default class ApartmentsController{
       available : (available===null)? Not(IsNull()) : available
     }
 
-    console.log(searchQuery)
-
     const apartmentCount =  await Apartment.count({where: searchQuery})
-
-    console.log(apartmentCount)
 
     if(!apartmentCount){
       return {
@@ -95,14 +86,13 @@ export default class ApartmentsController{
       }
     }
 
-    const lastPage = apartmentCount%5 !==0 ? Math.floor(apartmentCount / 5) : Math.floor(apartmentCount / 5) -1
+    // Check for the last page, if last page contains zero elements render last page, if less then zero, then return previos page
 
-    console.log(`lastPage - ${lastPage}`)
+    const lastPage = apartmentCount%5 !==0 ? Math.floor(apartmentCount / 5) : Math.floor(apartmentCount / 5) -1
 
     if( apartmentCount - (skip * 5) <= 0 ){
       skip = lastPage
     }
-    console.log(`skip - ${skip}`)
 
     const result = await Apartment.find({
       where: searchQuery,
@@ -151,18 +141,18 @@ export default class ApartmentsController{
       throw new NotFoundError("Apartment Not Found")
     }
 
-    console.log(Object.keys(apartmentToEdit))
-    console.log(Object.keys(data))
+    // console.log(
+    //   Object.keys(data)
+    //     .filter(key => (
+    //       data[key] !== undefined && 
+    //       (data[key].length > 0 || !isNaN(data[key]) || (data[key].lat && data[key].lon) ) && 
+    //       Object.keys(apartmentToEdit).includes(key))
+    //     )
+    // )
 
-    console.log(
-      Object.keys(data)
-        .filter(key => (
-          data[key] !== undefined && 
-          (data[key].length > 0 || !isNaN(data[key]) || (data[key].lat && data[key].lon) ) && 
-          Object.keys(apartmentToEdit).includes(key))
-        )
-    )
 
+    // Check if the entity has the columns coming from the data(client) also check if the values are are in correct data types: 
+    // If (string) -> length >0 , or is a number or if location object, has lat and lon keys (this type has changed so no more necessary)
 
     Object.keys(data)
       .filter(key => (

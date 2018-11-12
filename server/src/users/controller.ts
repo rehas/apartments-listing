@@ -24,8 +24,6 @@ export default class UserController{
       throw new BadRequestError("This email address is taken, please login or signup with a different address")
     }
 
-    console.log(typeof userType)
-
     const entity = User.create({fullName, email, userType})
 
     await entity.setPassword(password)
@@ -102,7 +100,6 @@ export default class UserController{
         key !=='password' && 
         Object.keys(userToBeEdited).includes(key)))
       .forEach( key=>{
-        console.log(`key is now ${key}`)
         userToBeEdited[key] = userData[key]
     })
 
@@ -132,7 +129,6 @@ export default class UserController{
   async getUserForEdit(
     @Param('userid') userid : number
   ){
-    console.log(userid)
     return await User.findOne(userid)
   }
 
@@ -152,8 +148,6 @@ export default class UserController{
     if(await User.findOne({where: {email}})){
       throw new BadRequestError("This email address is taken, please login or signup with a different address")
     }
-
-    console.log(typeof userType)
 
     const entity = User.create({fullName, email, userType})
 
