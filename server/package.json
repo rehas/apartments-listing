@@ -1,7 +1,7 @@
 {
   "name": "apartments-app-server",
   "version": "1.0.0",
-  "description": "toptal screening assignment apartments app",
+  "description": "apartments listing app",
   "main": "target/index.js",
   "scripts": {
     "start": "nodemon .",

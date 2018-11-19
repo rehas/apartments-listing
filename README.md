@@ -1,5 +1,3 @@
-# Toptal Screening Application  / BERAT REHA SONMEZ
-
 ## Apartment Listing Application
 
 This app is built with: 
